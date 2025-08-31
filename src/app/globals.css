@@ -1,26 +1,164 @@
 @import "tailwindcss";
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Alta";
+  src: url("/fonts/Alta_Typeface/Alta_light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: "Alta";
+  src: url("/fonts/Alta_Typeface/Alta_regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@font-face {
+  font-family: "Alta";
+  src: url("/fonts/Alta_Typeface/Alta_caption.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.animLink{
+  position: relative;
+  overflow: hidden;
+}
+
+.animLink::after{
+  content: "";
+  display: block;
+  background-color: var(--color-salmon);
+  left: 0;
+  width: 0%;
+  height: 3px;
+  /* transform: scaleX(0); */
+  transition: 250ms ease-in-out;
+}
+
+.animLink:hover::after{
+  width: 100%;
+  transform: translateX(101%);
+}
+
+.arch-grid-area{
+  grid-area: 2/1/3/2;
+}
+
+.ben-grid-area{
+  grid-area: 2/2/3/3;
+}
+.button1-grid-area{
+  grid-area:5/1/6/2
+}
+
+.button2-grid-area{
+  grid-area:5/2/6/3
+}
+
+.word1-grid-area{
+  grid-area:3/1/4/3
+}
+
+.word3-grid-area{
+  grid-row: 4/5
+}
+
+.after::after{
+  content: "";
+  display: block;
+  height: 2px;
+  width: 15em;
+  background-color: var(--color-light-pink);
+  position: absolute;
+  left: 100%;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+.custom-circle{
+  background-color: var(--color-light-pink);
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    var(--color-light-pink) 20px,
+    var(--color-light-pink) 40px
+  );
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  width: 20px;
+  height: 20px;
+  & .path {
+    stroke: hsl(0, 0%, 100%);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+  
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+@theme {
+  --color-sea: #97B3AE;
+  --color-pond: #D2E0D3;
+  --color-light-pink: #F0DDD6;
+  --color-salmon: #f2C3B9;
+  --color-salmon2: #f39c8a;
+  --color-wood-brown: #D6CBBF;
+  --color-gray-sky: #F0EEEA;
+  --color-white-almost: #fbfbfb;
+  --font-alta: Alta, serif;
+  --font-raleway: "Raleway", sans-serif;
+}
+
+@media (max-width:380px){
+  .small{
+    font-size: 2rem !important;
+  }
+}
+@media (min-width:1024px){
+  .arch-grid-area{
+    grid-area: 3/3/4/4;
+  }
+  .ben-grid-area{
+    grid-area: auto;
+    grid-row: span 2;
+  }
+  .button1-grid-area{
+    grid-area: 3/1/3/2;
+  }
+  .button2-grid-area{
+    grid-area:3/2/4/3
+  }
+  .word1-grid-area{
+    grid-area:auto
+  }
+
+  .word3-grid-area{
+    grid-row: auto;
+  }
 }
