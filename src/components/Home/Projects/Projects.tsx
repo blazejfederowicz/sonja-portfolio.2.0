@@ -4,10 +4,12 @@ import {motion} from 'motion/react'
 import { useRouter } from "next/navigation"
 import { AnimateProject } from "./Projects.types"
 import Tag from "@/common/Tag/Tag"
-import { PROJECTS_Text } from "@/constants"
 import useProject from "@/hooks/useProject/useProject"
 import Loading from "@/components/Shared/Loading/Loading"
 import Error from "@/components/Shared/Error/Error"
+import Modal from "@/components/Modal/Modal"
+import { PROJECT_FORM_ID, PROJECTS_TEXT } from "@/constants"
+import ProjectForm from "./components/ProjectForm/ProjectForm"
 
 
 export default function Projects(){
@@ -15,6 +17,7 @@ export default function Projects(){
     const [hoverAnim, setHoverAnim] = useState(true)
     const router = useRouter()
     const [canClick, setCanClick] = useState(true)
+    const [open, setOpen] = useState(false)
     const {projectState} = useProject()
 
 
@@ -49,7 +52,12 @@ export default function Projects(){
     return(<>
         <section id="projects" className="container px-2 mx-auto mt-28">
             <div>
-                <Tag text={PROJECTS_Text}/>
+                <div className="flex container px-2 mx-auto gap-[1em]">
+                    <Tag text={PROJECTS_TEXT}/>
+                    <Modal headline={PROJECTS_TEXT} open={open} setOpen={setOpen} form={PROJECT_FORM_ID}>
+                        <ProjectForm/>
+                    </Modal>
+                </div>
                 <div className={`${!!projectState.errorMessage || projectState.isLoading?"":"grid"} md:grid-cols-2 gap-[1em] max-w-[400px] md:max-w-[1000px] w-full mx-auto mt-25`}>
                     {   
                     projectState.isLoading? <Loading/>:

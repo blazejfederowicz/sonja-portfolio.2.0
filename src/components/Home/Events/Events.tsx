@@ -3,15 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 import {motion, useScroll, useTransform} from 'motion/react'
 import { Reveal } from '@/features/Reveal/Reveal';
 import Tag from '@/common/Tag/Tag';
-import { EVENTS_TEXT, IMAGE_PLACEHOLDER } from '@/constants';
+import { EVENT_FORM_ID, EVENTS_TEXT, IMAGE_PLACEHOLDER } from '@/constants';
 import Error from '@/components/Shared/Error/Error';
 import LoadingAnim from '@/features/LoadingAnim/LoadingAnim';
 import useEvents from '@/hooks/useEvents/useEvents';
+import Modal from '@/components/Modal/Modal';
+import EventForm from './components/EventForm/EventForm';
 
 
 export default function Events(){
     const ref = useRef<HTMLDivElement>(null)
     const [height, setHeight] = useState(0)
+    const [open, setOpen] = useState(false)
     const exebitionRef = useRef<HTMLDivElement>(null)
     const {scrollYProgress} = useScroll({
         target:exebitionRef,
@@ -45,8 +48,11 @@ export default function Events(){
     return(
         <>
             <section id='events' className="py-22 bg-white-almost">
-                <div className="flex container px-2 mx-auto">
+                <div className="flex container px-2 mx-auto gap-[1em]">
                     <Tag text={EVENTS_TEXT}/>
+                    <Modal headline={EVENTS_TEXT} open={open} setOpen={setOpen} form={EVENT_FORM_ID}>
+                        <EventForm/>
+                    </Modal>
                 </div>
                 <div className="h-[2em] w-full bg-white mt-5 sticky top-18 lg:hidden z-30 flex items-center">
                     <motion.div className="h-[1em] w-full bg-pond" style={{originX:0, scaleX:smallScreenProgressBar}}/>

@@ -11,7 +11,6 @@ export default function Project(){
     const {slug} = useParams()
     const {findProject, projectState} = useProject()
     const currentProject = findProject(slug as string)
-    console.log(projectState.projectList)
 
     if(!!!currentProject) return <Error errorMessage=""/>
 

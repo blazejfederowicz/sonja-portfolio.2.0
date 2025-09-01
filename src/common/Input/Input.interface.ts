@@ -1,18 +1,12 @@
-import { Children } from "@/types/common";
+import React from "react";
 
-export interface InputProps extends Children{
-    label?: string;
-    id?: string;
-    type?: string;
-    name?:string;
-    value?:string;
-    placeholder?: string;
-    isTextarea?: boolean;
-    inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
-    pattern?:string;
-    min?: number;
-    max?: number;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>void;
-    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>)=>void;
-    error?: string;
-}
+export type InputProps<T extends React.ElementType> = {
+  as?: T;
+  label?: string;
+  id?: string;
+  labelClass?: string;
+  inputClass?: string;
+  error?: string;
+  options?:any[]
+  children?: React.ReactNode;
+} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children">;

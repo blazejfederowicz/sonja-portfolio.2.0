@@ -1,16 +1,19 @@
 "use client"
 import Tag from "@/common/Tag/Tag"
-import { ABOUT_TEXT } from "@/constants"
+import { ABOUT_TEXT, SKILL_FORM_ID } from "@/constants"
 import { Reveal } from "@/features/Reveal/Reveal"
 import { useEffect, useRef, useState } from "react"
 import Error from "@/components/Shared/Error/Error"
 import Loading from "@/components/Shared/Loading/Loading"
 import useSkill from "@/hooks/useSkill/useSkill"
+import Modal from "@/components/Modal/Modal"
+import SkillForm from "./components/SkillForm/SkillForm"
 
 
 export default function About(){
     const parentRef = useRef<HTMLDivElement>(null)
     const [childWidth, setChildWidth] = useState<string | number>(0)
+    const [open, setOpen] = useState(false)
     const {skillState} = useSkill()
 
     useEffect(()=>{
@@ -30,8 +33,11 @@ export default function About(){
 
     return(
         <section id="about" className="container mx-auto px-2 pt-22 mb-22">
-            <div className="flex">
+            <div className="flex container px-2 mx-auto gap-[1em]">
                 <Tag text={ABOUT_TEXT}/>
+                <Modal headline={ABOUT_TEXT} open={open} setOpen={setOpen} form={SKILL_FORM_ID}>
+                    <SkillForm/>
+                </Modal>
             </div>
             <div className={`${!!skillState.errorMessage || skillState.isLoading?"":"grid"} grid-cols-1 sm:grid-cols-2 mx-auto gap-[2em] max-w-[420px] sm:max-w-[700px] w-full mt-24`}>
                 {

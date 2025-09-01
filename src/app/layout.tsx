@@ -5,6 +5,9 @@ import { Providers } from "@/store/providers";
 export const metadata: Metadata = {
   title: "Sonja Pengili",
   description: "Portfolio showcasing my skills and projects",
+  icons:{
+    icon:"/images/brandIconSalmon.svg"
+  }
 };
 
 export default function RootLayout({

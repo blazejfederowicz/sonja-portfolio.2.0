@@ -1,12 +1,10 @@
 "use client"
 import { CONTACT_TEXT } from "@/constants";
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { motion } from 'motion/react'
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import Hero from "@/components/Home/Hero/Hero";
-import Loading from "@/components/Shared/Loading/Loading";
 import Projects from "@/components/Home/Projects/Projects";
 import About from "@/components/Home/About/About";
 import Events from "@/components/Home/Events/Events";

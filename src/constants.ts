@@ -1,3 +1,5 @@
+import { label } from "motion/react-m";
+
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export const IMAGES_ROUTES={
@@ -88,7 +90,7 @@ export const NOT_FOUND = "Not Found";
 
 //Home
 export const CONTACT_TEXT = "Contact";
-export const PROJECTS_Text = "Projects";
+export const PROJECTS_TEXT = "Projects";
 export const HERO_TAG = "Façade";
 export const SURNAME = "Pengili";
 export const NAME = "Sonja";
@@ -147,10 +149,10 @@ export const CONTACT_MESSAGE = "Send Me a Message";
 export const CONTACT_TAG = "STAY CONNECTED";
 export const CONTACT = "CONTACT";
 export const FORM_INPUTS = [
-    {id:"name", label:"Name", type:"text", placeholder:"Your name", isTextarea:false},
-    {id:"email", label:"Email", type:"text", placeholder:"your.email@example.com", isTextarea:false},
-    {id:"title", label:"Title", type:"text", placeholder:"Your title", isTextarea:false},
-    {id:"message", label:"Message", placeholder:"Your message", isTextarea:true},
+    {id:"name", label:"Name", type:"text", placeholder:"Your name", as:"input" as "input"},
+    {id:"email", label:"Email", type:"text", placeholder:"your.email@example.com", as:"input" as "input"},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
+    {id:"message", label:"Message", placeholder:"Your message", as:"textarea" as "textarea"},
 ];
 
 export const CONTACT_BUTTON = "Send Message";
@@ -194,7 +196,7 @@ export const ERROR_MESSAGES = {
     FETCH_EVENTS:"Failed to fetch events data"
 }
 
-export const ERROR = "Error:"
+export const ERROR = "Error: "
 export const LOADING_TEXT = "Loading"
 export const UNKNOWN_ERROR = "Unkown error"
 
@@ -203,3 +205,40 @@ export const enum ACTION_TYPES{
     events = "events/fetchEvents",
     projects = "projects/fetchProjects"
 }
+
+//Login
+export const AUTH_LOGIN = "LOGIN"
+export const AUTH_MESSAGE = "Check your email for the login link!"
+export const AUTH_EMAIL = "email"
+
+//Modal
+export const CANCEL = "CANCEL"
+export const SAVE = "SAVE"
+export const EDIT = "EDIT SECTION"
+export const SKILL_FORM_INPUTS = [
+    {id:"tag", label:"Skill Tag", type:"text", placeholder:"Skill tag", as:"input" as "input"},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
+    {id:"desc", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+];
+
+export const SKILL_FORM_ID = "skill_form"
+export const EVENT_FORM_ID = "event_form"
+export const PROJECT_FORM_ID = "project_form"
+
+export const EVENT_FORM_INPUTS = [
+    {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
+    {id:"side_text", label:"Side text", type:"text", placeholder:"Your side text", as:"input" as "input"},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
+    {id:"desc", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+];
+
+export const PROJECT_FORM_INPUTS = [
+    {id:"tag", label:"Project Tag", type:"text", placeholder:"Project tag", as:"input" as "input"},
+    {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
+    {id:"desc", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+    {id:"height", label:"Thumbnail Image height", as: "select" as "select" , options:[
+        200, 400, 600
+    ]},
+    
+];
