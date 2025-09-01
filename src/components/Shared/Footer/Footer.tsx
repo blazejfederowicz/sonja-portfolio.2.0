@@ -1,11 +1,11 @@
 "use client"
-import { useProjects } from '@/store/ProjectContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import { COPYRIGHT, FOOTER_ROUTES, LINK_TEXT, SOCIAL_LINKS, SOCIALS } from '@/constants'
+import useProject from '@/hooks/useProject/useProject'
 
 export default function Footer (){
-    const projects = useProjects()
+    const {projectState} = useProject()
 
     return(<>
         <footer className="bg-zinc-100 relative">
@@ -42,8 +42,8 @@ export default function Footer (){
                     <h4 className='text-lg sm:text-xl md:text-3xl mb-3 font-bold text-wood-brown'>Projects</h4>
                     <div className="flex flex-col flex-wrap h-[8em]">
                         {
-                            projects.map(e=>(
-                                <Link key={e.index} href={`/project/${e.index}`} className='py-1 text-sm sm:text-base md:text-lg font-medium me-2 text-wood-brown/60 hover:text-wood-brown active:text-wood-brown/90'>Project {e.index}</Link>
+                            projectState.projectList.map(e=>(
+                                <Link key={e.id} href={`/project/${e.id}`} className='py-1 text-sm sm:text-base md:text-lg font-medium me-2 text-wood-brown/60 hover:text-wood-brown active:text-wood-brown/90'>Project {e.id}</Link>
                             ))
                         }
                     </div>

@@ -1,11 +1,13 @@
 'use client'
 import { useState } from "react"
 import {motion} from 'motion/react'
-import { useProjects } from "@/store/ProjectContext"
 import { useRouter } from "next/navigation"
 import { AnimateProject } from "./Projects.types"
 import Tag from "@/common/Tag/Tag"
 import { PROJECTS_Text } from "@/constants"
+import useProject from "@/hooks/useProject/useProject"
+import Loading from "@/components/Shared/Loading/Loading"
+import Error from "@/components/Shared/Error/Error"
 
 
 export default function Projects(){
@@ -13,11 +15,11 @@ export default function Projects(){
     const [hoverAnim, setHoverAnim] = useState(true)
     const router = useRouter()
     const [canClick, setCanClick] = useState(true)
-    const projectsArr = useProjects()
+    const {projectState} = useProject()
 
 
     const handlePageTransition = (
-        element: { index: number; src: string; height?: string | number; title?: string },
+        element: { id: string; thumbnail: string; height?: string | number; title?: string },
         event: React.MouseEvent<HTMLDivElement>
     ) => {
         if(!canClick) return;
@@ -29,8 +31,8 @@ export default function Projects(){
 
         setTimeout(() => {
             setAnimateProject({
-            index: element.index,
-            src: element.src,
+            index: element.id,
+            src: element.thumbnail,
             top: rect.top,
             left: rect.left,
             width: rect.width,
@@ -48,11 +50,14 @@ export default function Projects(){
         <section id="projects" className="container px-2 mx-auto mt-28">
             <div>
                 <Tag text={PROJECTS_Text}/>
-                <div className="grid md:grid-cols-2 gap-[1em] max-w-[400px] md:max-w-[1000px] w-full mx-auto mt-25">
+                <div className={`${!!projectState.errorMessage || projectState.isLoading?"":"grid"} md:grid-cols-2 gap-[1em] max-w-[400px] md:max-w-[1000px] w-full mx-auto mt-25`}>
+                    {   
+                    projectState.isLoading? <Loading/>:
+                    !!projectState.errorMessage? <Error errorMessage={projectState.errorMessage}/>: <>
                     <div className="flex w-full flex-col gap-[1em]">
-                    {projectsArr.filter((_,i)=> i%2===0).map((e,i)=>{
+                    {projectState.projectList.filter((_,i)=> i%2===0).map((e,i)=>{
                         return(
-                        <motion.div  key={`even-${e.index}`} className="group relative " 
+                        <motion.div  key={`even-${e.id}`} className="group relative " 
                         whileHover={!animateProject ? { scale: 1.02,cursor:"pointer", boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
                                     transition:{
                                         duration:0.28
@@ -60,7 +65,7 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover `} 
-                                style={{backgroundImage:`url(${e.src})`,height:e.height}}
+                                style={{backgroundImage:`url(${e.thumbnail})`,height:e.height}}
                                 initial={{transform:"translateX(-100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
@@ -72,9 +77,9 @@ export default function Projects(){
                     )})}
                     </div>
                     <div className="flex w-full flex-col gap-[1em]">
-                    {projectsArr.filter((_,i)=> i%2!==0).map((e,i)=>{
+                    {projectState.projectList.filter((_,i)=> i%2!==0).map((e,i)=>{
                         return(
-                        <motion.div  key={`odd-${e.index}`} className="group relative "
+                        <motion.div  key={`odd-${e.id}`} className="group relative "
                         whileHover={!animateProject ? { scale: 1.02, cursor:"pointer", boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
                                     transition:{
                                         duration:0.28
@@ -82,7 +87,7 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover`}
-                                style={{backgroundImage:`url(${e.src})`,height:e.height}}
+                                style={{backgroundImage:`url(${e.thumbnail})`,height:e.height}}
                                 initial={{transform:"translateX(100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
@@ -93,6 +98,7 @@ export default function Projects(){
                        </motion.div>
                     )})}
                     </div>
+                    </>}
                     {animateProject && (
                         <motion.div
                             initial={{

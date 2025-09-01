@@ -3,7 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import {motion, useScroll, useTransform} from 'motion/react'
 import { Reveal } from '@/features/Reveal/Reveal';
 import Tag from '@/common/Tag/Tag';
-import { EVENTS, EVENTS_TEXT } from '@/constants';
+import { EVENTS_TEXT, IMAGE_PLACEHOLDER } from '@/constants';
+import Error from '@/components/Shared/Error/Error';
+import LoadingAnim from '@/features/LoadingAnim/LoadingAnim';
+import useEvents from '@/hooks/useEvents/useEvents';
 
 
 export default function Events(){
@@ -21,6 +24,7 @@ export default function Events(){
     const radius = 90;
     const circumference = 2*Math.PI *radius
     const stroke = useTransform(scrollYProgress,[0,1],[circumference,0])
+    const {eventState} = useEvents()
 
     useEffect(()=>{
 
@@ -63,21 +67,23 @@ export default function Events(){
                             </div>
                     </div>
                     <div className="">
-                        {
-                            EVENTS.map((e,i,arr)=>(
+                        {   
+                        eventState.isLoading ? <LoadingAnim customClass='w-full h-full flex text-7xl justify-center items- center' />:
+                        !!eventState.errorMessage? <Error errorMessage={eventState.errorMessage} />:
+                            Array.isArray(eventState.eventList) && eventState.eventList.map((e,i,arr)=>(
                                 <div key={i}>
                                     <div className="w-full flex relative pr-10 sm:pr-20">
-                                        <div ref={ref} className={`grow ${height<400?'h-[var(--height)]':'h-[25em]'} sm:h-[30em]  bg-no-repeat bg-cover bg-center flex items-end re sm:block`} style={{backgroundImage:`url(${e.src})`,['--height'as any]:`${height}px`} as React.CSSProperties}>
+                                        <div ref={ref} className={`grow ${height<400?'h-[var(--height)]':'h-[25em]'} sm:h-[30em]  bg-no-repeat bg-cover bg-center flex items-end re sm:block`} style={{backgroundImage:`url(${!!e.thumbnail?e.thumbnail:IMAGE_PLACEHOLDER})`,['--height'as any]:`${height}px`} as React.CSSProperties}>
                                             <div className="w-[15em] md:w-[22em] bg-white-almost h-[280px] sm:h-full py-10 sm:py-20 px-5 md:px-0 flex justify-center text-wood-brown flex-col shadow-2xl translate-y-1/3 sm:translate-0">
                                                 <Reveal>
                                                     <h5 className='md:text-xl sm:text-lg text-base tracking-wider md:pl-14 md:pr-5 font-semibold'>{e.title}</h5>
                                                 </Reveal>
                                                 <Reveal>
-                                                    <p className='mt-4 md:pl-14 md:pr-22 text-sm md:text-base'>{e.message}</p>
+                                                    <p className='mt-4 md:pl-14 md:pr-22 text-sm md:text-base'>{e.short_description}</p>
                                                 </Reveal>
                                             </div>
                                         </div>
-                                        <h3 className="rotate-90 tracking-wider w-[1.5em] h-fit box-border flex items-center justify-center text-salmon2 font-alta text-4xl sm:text-6xl leading-none whitespace-nowrap absolute right-0 top-1/2 -translate-y-1/2"><Reveal>{e.sideText}</Reveal></h3>
+                                        <h3 className="rotate-90 tracking-wider w-[1.5em] h-fit box-border flex items-center justify-center text-salmon2 font-alta text-4xl sm:text-6xl leading-none whitespace-nowrap absolute right-0 top-1/2 -translate-y-1/2"><Reveal>{e.side_text}</Reveal></h3>
                                     </div>
                                     {i < arr.length - 1 && (
                                         <div className="w-full pe-20">

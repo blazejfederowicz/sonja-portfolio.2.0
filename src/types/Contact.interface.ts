@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from '@/constants'
+import { FORM_TYPES } from '@/constants'
 
 export interface State{
     name:string;
@@ -17,7 +17,7 @@ export interface State{
 }
 
 export type Action =
-| {type: ACTION_TYPES.INPUT_CHANGE; payload: { name: keyof State; value: string}}
-| {type: ACTION_TYPES.SET_FULLFIELD | ACTION_TYPES.SET_REJECTED; payload: keyof State}
-| {type: ACTION_TYPES.SET_ERROR; payload: State['error']}
-| {type: ACTION_TYPES.CLEAR_FORM | ACTION_TYPES.SET_PENDING}
+| {type: FORM_TYPES.INPUT_CHANGE; payload: { name: keyof State; value: string}}
+| {type: FORM_TYPES.SET_FULLFIELD | FORM_TYPES.SET_REJECTED; payload: keyof State}
+| {type: FORM_TYPES.SET_ERROR; payload: State['error']}
+| {type: FORM_TYPES.CLEAR_FORM | FORM_TYPES.SET_PENDING}

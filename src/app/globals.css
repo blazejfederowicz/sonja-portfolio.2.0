@@ -89,6 +89,10 @@
   );
 }
 
+.after-line::after {
+  width: calc(var(--child-width) - 2.5em);
+}
+
 .spinner {
   animation: rotate 2s linear infinite;
   width: 20px;

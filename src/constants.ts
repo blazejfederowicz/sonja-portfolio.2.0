@@ -137,6 +137,7 @@ export const ABOUT = [{
 ];
 
 export const ABOUT_TEXT = "About";
+export const IMAGE_PLACEHOLDER = "https://placehold.co/600x400"
 
 //Contact
 
@@ -167,7 +168,7 @@ export const CONTACT_SOCIALS = [
 
 //Form
 
-export const enum ACTION_TYPES {
+export const enum FORM_TYPES {
   INPUT_CHANGE= "INPUT_CHANGE",
   SET_ERROR= "SET_ERROR",
   CLEAR_FORM= "CLEAR_FORM",
@@ -181,8 +182,24 @@ export const FULLFIELD_MESSAGE = "Message sent!"
 export const REJECTED_MESSAGE = "Something went wrong, please try again later"
 
 //Redux
-export const API={
-    skills: BASE_URL+"/skills",
-    events: BASE_URL+"/events",
-    projects: BASE_URL+"/projects",
+export const API_ROUTES={
+    skills: BASE_URL+"/api/skills",
+    events: BASE_URL+"/api/events",
+    projects: BASE_URL+"/api/projects",
+}
+
+export const ERROR_MESSAGES = {
+    FETCH_SKILLS: "Failed to fetch skills data",
+    FETCH_PROJECTS: "Failed to fetch projects data",
+    FETCH_EVENTS:"Failed to fetch events data"
+}
+
+export const ERROR = "Error:"
+export const LOADING_TEXT = "Loading"
+export const UNKNOWN_ERROR = "Unkown error"
+
+export const enum ACTION_TYPES{
+    skills = "skills/fetchSkills",
+    events = "events/fetchEvents",
+    projects = "projects/fetchProjects"
 }

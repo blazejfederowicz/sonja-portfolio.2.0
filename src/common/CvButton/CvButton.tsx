@@ -25,7 +25,7 @@ export default function CvButton({download, text}:CvButtonProps){
     return(
         <div className="flex items-center justify-end button1-grid-area">
             <Reveal>
-                <a onClick={handleDwonload}  download={download} className="relative cursor-pointer group md:p-4 p-3 text-xs group sm:text-base text-transparent bg-wood-brown rounded-4xl">
+                <a onClick={handleDwonload} href={download}  download className="relative cursor-pointer group md:p-4 p-3 text-xs group sm:text-base text-transparent bg-wood-brown rounded-4xl">
                     <motion.div className="absolute group-hover:bg-salmon group-active:bg-salmon transition-[background] duration-150 ease-in-out z-10 bottom-1/2 w-fit md:px-[0.85rem] px-[0.65rem] h-[90%] -translate-x-2/7 sm:-translate-x-1/3 flex items-center whitespace-nowrap translate-y-1/2 right-[1%]  text-xs sm:text-base text-white bg-light-pink rounded-4xl"
                         animate={buttonSlide ? {x:`${x}%`} : {x:0}}
                     >{CV_BUTTON}</motion.div>

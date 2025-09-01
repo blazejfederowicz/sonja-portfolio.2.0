@@ -1,5 +1,5 @@
 "use client"
-import { ACTION_TYPES, CONTACT_BUTTON, CONTACT_MESSAGE, FORM_INPUTS } from "@/constants";
+import { FORM_TYPES, CONTACT_BUTTON, CONTACT_MESSAGE, FORM_INPUTS } from "@/constants";
 import ContactLayout from "../layout/ContactLayout";
 import Input from "@/common/Input/Input";
 import { FormButton } from "@/common/FormButton/FormButton";
@@ -14,13 +14,13 @@ export default function ContactForm(){
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
         const {name, value} = e.target;
-        dispatch({type:ACTION_TYPES.INPUT_CHANGE, payload:{name:name as keyof State, value}})
+        dispatch({type:FORM_TYPES.INPUT_CHANGE, payload:{name:name as keyof State, value}})
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         
-        dispatch({type: ACTION_TYPES.SET_PENDING})
+        dispatch({type: FORM_TYPES.SET_PENDING})
         const errors = handleErrors({
             name: state.name,
             email: state.email,
@@ -29,7 +29,7 @@ export default function ContactForm(){
         })
 
         if(Object.keys(errors).length > 0){
-            dispatch({type:ACTION_TYPES.SET_ERROR, payload: errors as State['error']})
+            dispatch({type:FORM_TYPES.SET_ERROR, payload: errors as State['error']})
             return
         }
 

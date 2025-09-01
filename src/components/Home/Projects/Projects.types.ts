@@ -1,5 +1,5 @@
 export type AnimateProject = {
-    index: number;
+    index: string;
     src: string;
     top: number;
     left: number;

@@ -1,16 +1,23 @@
 "use client"
 import { CONTACT_TEXT } from "@/constants";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from 'motion/react'
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import Hero from "@/components/Home/Hero/Hero";
+import Loading from "@/components/Shared/Loading/Loading";
+import Projects from "@/components/Home/Projects/Projects";
 import About from "@/components/Home/About/About";
 import Events from "@/components/Home/Events/Events";
-import Projects from "@/components/Home/Projects/Projects";
+import { useAppDispatch } from "@/lib/hooks";
+import { fetchSkills } from "@/store/skills/thunk";
+import { fetchEvents } from "@/store/events/thunk";
+import { fetchProjects } from "@/store/projects/thunk";
 
 export default function Home() {
-  const [footerPosition, setFooterPosition] = useState<null | DOMRect>(null)
+    const [footerPosition, setFooterPosition] = useState<null | DOMRect>(null)
+    const dispatch = useAppDispatch();
     const router = useRouter()
 
     const handleClick = (e: React.MouseEvent)=>{
@@ -20,6 +27,10 @@ export default function Home() {
     }
 
     useEffect(()=>{
+        dispatch(fetchSkills())
+        dispatch(fetchEvents())
+        dispatch(fetchProjects())
+
         document.body.classList.remove("overflow-hidden")
         const html=document.documentElement.classList;
 

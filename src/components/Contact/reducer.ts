@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from "@/constants"
+import { FORM_TYPES } from "@/constants"
 import { Action, State } from "@/types/Contact.interface"
 
 export const DEFAULT_STATE={
@@ -23,19 +23,19 @@ export const INITIAL_VALUE={
 
 export const reducer = (state:State, action:Action) =>{
     switch(action.type){
-        case ACTION_TYPES.INPUT_CHANGE:
+        case FORM_TYPES.INPUT_CHANGE:
             return {...state, [action.payload.name]: action.payload.value,
                 error:{...state.error, [action.payload.name]:null}, loading:false
             }
-        case ACTION_TYPES.SET_ERROR:
+        case FORM_TYPES.SET_ERROR:
             return {...state, error:{...state.error, ...action.payload}, loading: false}
-        case ACTION_TYPES.SET_PENDING:
+        case FORM_TYPES.SET_PENDING:
             return {...state, loading:true, fullfield: null, rejected:null}
-        case ACTION_TYPES.SET_FULLFIELD:
+        case FORM_TYPES.SET_FULLFIELD:
             return {...state, ...INITIAL_VALUE, fullfield: action.payload, rejected: null}
-        case ACTION_TYPES.SET_REJECTED:
+        case FORM_TYPES.SET_REJECTED:
             return {...state, ...INITIAL_VALUE, fullfield: null, rejected: action.payload}
-        case ACTION_TYPES.CLEAR_FORM:
+        case FORM_TYPES.CLEAR_FORM:
             return {...state, ...INITIAL_VALUE}
     }
 }
