@@ -11,3 +11,12 @@ export const fetchSkills = createAsyncThunk<Skill[]>(
     return response.data;
   }
 );
+
+export const postSkill = createAsyncThunk<Skill, {skill:Skill}>(
+  ACTION_TYPES.addSkill,
+  async ({skill}) => {
+    const response = await axios.post(API_ROUTES.skills, skill);
+
+    return response.data;
+  }
+);

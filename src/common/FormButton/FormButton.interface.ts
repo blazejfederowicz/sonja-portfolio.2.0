@@ -3,4 +3,5 @@ export interface FormButtonProps{
     text: string;
     isSubmiting?: boolean;
     type?:string;
+    icon?:string;
 }

@@ -1,8 +1,9 @@
-import supabaseAdmin from "@/lib/supabaseAdmin";
+import { TABLES } from "@/constants";
+import supabase from "@/lib/supabaseClient";
 
 export async function GET() {
-    const {data, error} = await supabaseAdmin
-        .from('projects')
+    const {data, error} = await supabase
+        .from(TABLES.projects)
         .select('*')
         .order('id', { ascending: false });
 

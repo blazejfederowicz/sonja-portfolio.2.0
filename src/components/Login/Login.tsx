@@ -4,7 +4,7 @@ import Input from "../../common/Input/Input";
 import AuthLayout from "./Layout/AuthLayout/AuthLayout";
 import { AUTH_EMAIL, AUTH_LOGIN, AUTH_MESSAGE, EMAIL, EMAIL_TEXT, ERROR } from "@/constants";
 import { useState } from "react";
-import supabaseAdmin from "@/lib/supabaseAdmin";
+import supabaseAdmin from "@/lib/supabaseClient";
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ export default function Login(){
             <form onSubmit={handleSubmit} className="flex flex-col gap-[2em]">
                 <Input label={EMAIL_TEXT} id={AUTH_EMAIL} value={email}
                     onChange={(e) => setEmail(e.target.value)}/>
-                <FormButton type="submit" text={AUTH_LOGIN}/>
+                <FormButton type="submit" text={AUTH_LOGIN} icon=""/>
             </form>
             <div className="flex flex-col w-full items-center justify-center">
                 {!!message &&

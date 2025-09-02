@@ -202,8 +202,17 @@ export const UNKNOWN_ERROR = "Unkown error"
 
 export const enum ACTION_TYPES{
     skills = "skills/fetchSkills",
+    addSkill = "skills/postSkill",
+    updateSkill = "skills/updateSkill",
+    removeSkill = "skills/removeSkill",
     events = "events/fetchEvents",
-    projects = "projects/fetchProjects"
+    addEvent = "events/postEvent",
+    updateEvent = "events/updateEvent",
+    removeEvent = "events/removeEvent",
+    projects = "projects/fetchProjects",
+    addProject = "projects/postProject",
+    updateProject = "projects/updateProject",
+    removeProject = "projects/removeProject",
 }
 
 //Login
@@ -218,7 +227,7 @@ export const EDIT = "EDIT SECTION"
 export const SKILL_FORM_INPUTS = [
     {id:"tag", label:"Skill Tag", type:"text", placeholder:"Skill tag", as:"input" as "input"},
     {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"desc", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
 ];
 
 export const SKILL_FORM_ID = "skill_form"
@@ -229,16 +238,24 @@ export const EVENT_FORM_INPUTS = [
     {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
     {id:"side_text", label:"Side text", type:"text", placeholder:"Your side text", as:"input" as "input"},
     {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"desc", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
 ];
 
 export const PROJECT_FORM_INPUTS = [
     {id:"tag", label:"Project Tag", type:"text", placeholder:"Project tag", as:"input" as "input"},
     {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
     {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"desc", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
     {id:"height", label:"Thumbnail Image height", as: "select" as "select" , options:[
         200, 400, 600
     ]},
     
 ];
+
+export const CONTENT_TEXT = "Add new content"
+export const CONTENT = "Content"
+export const TABLES = {
+    skills:"skills",
+    events:"events",
+    projects:"projects"
+}

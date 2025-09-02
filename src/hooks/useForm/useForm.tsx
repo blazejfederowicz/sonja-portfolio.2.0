@@ -5,16 +5,32 @@ export default function useForm<T extends Record<string, any>>(initialValues:T){
     const [state, setState] = useState<T>(initialValues)
     const [error, setError] = useState<Partial<Record<keyof T, string>>>({})
 
-    const handleChange= (
+    const fileToBase64 = (file: File): Promise<string> =>
+        new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+    });
+
+    const handleChange = async (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) =>{
-        const {name, value} = e.currentTarget;
+    ) => {
+        const { name, value } = e.currentTarget;
+        const files = (e.currentTarget as HTMLInputElement).files;
 
-        setState(prev=>({...prev, [name]: value}))
-        setError(prev=>({...prev, [name]: ""}))
-    }
+        if (files && files[0]) {
+            const base64 = await fileToBase64(files[0]);
+            setState(prev => ({ ...prev, [name]: base64 }));
+        } else {
+            setState(prev => ({ ...prev, [name]: value }));
+        }
 
-    const handleSubmit= (func?: (values: T)=>void) => (
+        setError(prev => ({ ...prev, [name]: "" }));
+    };
+
+    const handleSubmit= (func?: (values:T)=>void) => (
         e: React.FormEvent
     ) =>{
         e.preventDefault()

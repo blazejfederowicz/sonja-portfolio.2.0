@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {SkillState } from "./reducer.interface";
-import { fetchSkills } from "./thunk";
+import { fetchSkills, postSkill } from "./thunk";
 import { UNKNOWN_ERROR } from "@/constants";
+import { Skill } from "@/types/common";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 const skillsInitialState: SkillState = {
     skillList: [],
@@ -13,6 +15,9 @@ const skillSlice = createSlice({
     name: 'skills',
     initialState: skillsInitialState,
     reducers:{
+        addSkill(state, action: PayloadAction<Skill>) {
+            state.skillList.push(action.payload);
+        },
     },
     extraReducers: builder =>{
         builder
@@ -27,10 +32,21 @@ const skillSlice = createSlice({
                 state.isLoading = false;
                 state.errorMessage = action.error.message || UNKNOWN_ERROR
             })
+            .addCase(postSkill.fulfilled, (state, action)=>{
+                state.isLoading = false
+            })
+            .addCase(postSkill.pending,(state)=>{
+                state.isLoading = true;
+            })
+            .addCase(postSkill.rejected,(state, action)=>{
+                state.isLoading = false;
+                state.errorMessage = action.error.message || UNKNOWN_ERROR
+            })
     }
 })
 
-// export const {
-// } = projectSlice.actions;
+export const {
+    addSkill
+} = skillSlice.actions;
 
 export default skillSlice.reducer;

@@ -1,16 +1,24 @@
 import Input from "@/common/Input/Input";
-import { SKILL_FORM_ID, SKILL_FORM_INPUTS } from "@/constants";
+import { RealtimeListener } from "@/components/RealtimeListener/RealtimeListener";
+import { SKILL_FORM_ID, SKILL_FORM_INPUTS, TABLES } from "@/constants";
 import useForm from "@/hooks/useForm/useForm";
+import useSkill from "@/hooks/useSkill/useSkill";
+import { addSkill } from "@/store/skills/slice";
 
 export default function SkillForm(){
     const {state, error, handleChange, handleSubmit} = useForm({
         tag:"",
         title:"",
-        desc:""
+        short_description:""
     })
+    const {dispatchSkill} = useSkill()
 
-    return(
-        <form id={SKILL_FORM_ID} onSubmit={handleSubmit()}>
+    return(<>
+        <RealtimeListener 
+            table={TABLES.skills}
+            onInsert={(row)=>addSkill(row)} 
+        />
+        <form id={SKILL_FORM_ID} onSubmit={handleSubmit(dispatchSkill)}>
             {
                 SKILL_FORM_INPUTS.map((input, index)=>(
                     <Input 
@@ -24,5 +32,5 @@ export default function SkillForm(){
                 ))
             }
         </form>
-    )
+    </>)
 }

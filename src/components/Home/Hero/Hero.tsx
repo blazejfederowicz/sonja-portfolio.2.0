@@ -11,7 +11,7 @@ import SecondaryButton from '@/common/SecondaryButton/SecondaryButton';
 
 export default function Hero(){
     const [rectHeight, setRectHeight] = useState(0)
-    const {width} = useScreen()
+    const {width, mounted} = useScreen()
     const circle1 = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
@@ -34,15 +34,19 @@ export default function Hero(){
                         <h1 className="font-alta font-normal tracking-widest small text-4xl sm:text-6xl lg:text-7xl text-end text-zinc-700">{NAME}</h1>
                     </Reveal>
                     <motion.div className=" flex items-center px-2 ms-4 w-fit rounded-full lg:hidden" 
-                        initial={{
-                            opacity:0,
-                            transform:"translateX(100px)"
-                        }}
-                        whileInView={{
-                            opacity:1,
-                            transform:"translateX(0)",
-                            transition:{
-                                delay:0.2
+                        initial={false}
+                        animate={mounted?"visible":"hidden"}
+                        variants={{
+                            hidden:{
+                                opacity:0,
+                                transform:"translateX(100px)"
+                            },
+                            visible:{
+                                opacity:1,
+                                transform:"translateX(0)",
+                                transition:{
+                                    delay:0.2
+                                }
                             }
                         }}
                         viewport={{once:true}}
@@ -53,15 +57,19 @@ export default function Hero(){
                 </div>
                 <div className=" items-center word2-grid-area hidden lg:flex" >
                     <motion.div ref={circle1} className=" flex items-center px-2 custom-circle w-fit rounded-full" style={{height:rectHeight}}
-                        initial={{
-                            opacity:0,
-                            transform:"translateX(100px)"
-                        }}
-                        whileInView={{
-                            opacity:1,
-                            transform:"translateX(0)",
-                            transition:{
-                                delay:0.2
+                        initial={false}
+                        animate={mounted?"visible":"hidden"}
+                        variants={{
+                            hidden:{
+                                opacity:0,
+                                transform:"translateX(100px)"
+                            },
+                            visible:{
+                                opacity:1,
+                                transform:"translateX(0)",
+                                transition:{
+                                    delay:0.2
+                                }
                             }
                         }}
                         viewport={{once:true}}

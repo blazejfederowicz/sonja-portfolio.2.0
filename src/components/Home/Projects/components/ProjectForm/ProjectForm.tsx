@@ -1,6 +1,9 @@
+import { FormButton } from "@/common/FormButton/FormButton";
 import Input from "@/common/Input/Input";
-import { PROJECT_FORM_ID, PROJECT_FORM_INPUTS } from "@/constants";
+import { CONTENT, CONTENT_TEXT, PROJECT_FORM_ID, PROJECT_FORM_INPUTS } from "@/constants";
 import useForm from "@/hooks/useForm/useForm";
+import { DialogTitle } from "@headlessui/react";
+import { useState } from "react";
 
 export default function ProjectForm(){
     const {state, error, handleChange, handleSubmit} = useForm({
@@ -10,6 +13,10 @@ export default function ProjectForm(){
         desc:"",
         height:"200"
     })
+
+    const handleClick = () =>{
+
+    }
 
     return(
         <form id={PROJECT_FORM_ID} onSubmit={handleSubmit()}>
@@ -25,6 +32,12 @@ export default function ProjectForm(){
                     />
                 ))
             }
+            <div className="mt-2">
+                <DialogTitle as="h3" className="text-base font-semibold text-white">
+                    {CONTENT}
+                </DialogTitle>
+                <FormButton text={CONTENT_TEXT} icon="bi bi-plus text-xl" click={handleClick}/>
+            </div>
         </form>
     )
 }
