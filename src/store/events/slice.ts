@@ -31,7 +31,7 @@ const eventSlice = createSlice({
                 state.isLoading = false;
                 state.errorMessage = action.error.message || UNKNOWN_ERROR
             })
-            .addCase(postEvent.fulfilled, (state, action)=>{
+            .addCase(postEvent.fulfilled, (state)=>{
                 state.isLoading = false
             })
             .addCase(postEvent.pending,(state)=>{

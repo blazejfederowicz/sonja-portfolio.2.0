@@ -3,7 +3,6 @@ import Input from "@/common/Input/Input";
 import { CONTENT, CONTENT_TEXT, PROJECT_FORM_ID, PROJECT_FORM_INPUTS } from "@/constants";
 import useForm from "@/hooks/useForm/useForm";
 import { DialogTitle } from "@headlessui/react";
-import { useState } from "react";
 
 export default function ProjectForm(){
     const {state, error, handleChange, handleSubmit} = useForm({

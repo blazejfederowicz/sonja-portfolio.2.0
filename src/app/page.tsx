@@ -35,7 +35,7 @@ export default function Home() {
         window.scrollTo(0,0)
 
         if(!html.contains("scroll-smooth")) {html.add("scroll-smooth")}
-    },[])
+    },[dispatch])
 
     return(
         <>

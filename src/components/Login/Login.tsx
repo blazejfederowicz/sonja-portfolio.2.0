@@ -2,7 +2,7 @@
 import { FormButton } from "@/common/FormButton/FormButton";
 import Input from "../../common/Input/Input";
 import AuthLayout from "./Layout/AuthLayout/AuthLayout";
-import { AUTH_EMAIL, AUTH_LOGIN, AUTH_MESSAGE, EMAIL, EMAIL_TEXT, ERROR } from "@/constants";
+import { AUTH_EMAIL, AUTH_LOGIN, AUTH_MESSAGE, EMAIL_TEXT, ERROR } from "@/constants";
 import { useState } from "react";
 import supabaseAdmin from "@/lib/supabaseClient";
 

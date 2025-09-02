@@ -10,7 +10,7 @@ import useNavbar from "@/hooks/useNavbar/useNavbar";
 export default function Navbar({delay=0,home=false,text="black"}){
     const [ link , setLink ] = useState(false);
     const controls = useAnimation()
-    const {navRef, showMenu, isScrolled, setShowMenu, setIsScrolled } = useNavbar()
+    const {navRef, showMenu, isScrolled, setShowMenu } = useNavbar()
 
     useEffect(()=>{
         if(link ){

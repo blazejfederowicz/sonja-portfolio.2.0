@@ -1,5 +1,3 @@
-import { label } from "motion/react-m";
-
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export const IMAGES_ROUTES={

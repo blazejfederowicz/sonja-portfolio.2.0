@@ -63,7 +63,7 @@ export default function Projects(){
                     projectState.isLoading? <Loading/>:
                     !!projectState.errorMessage? <Error errorMessage={projectState.errorMessage}/>: <>
                     <div className="flex w-full flex-col gap-[1em]">
-                    {projectState.projectList.filter((_,i)=> i%2===0).map((e,i)=>{
+                    {projectState.projectList.filter((_,i)=> i%2===0).map((e)=>{
                         return(
                         <motion.div  key={`even-${e.id}`} className="group relative " 
                         whileHover={!animateProject ? { scale: 1.02,cursor:"pointer", boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
@@ -85,7 +85,7 @@ export default function Projects(){
                     )})}
                     </div>
                     <div className="flex w-full flex-col gap-[1em]">
-                    {projectState.projectList.filter((_,i)=> i%2!==0).map((e,i)=>{
+                    {projectState.projectList.filter((_,i)=> i%2!==0).map((e)=>{
                         return(
                         <motion.div  key={`odd-${e.id}`} className="group relative "
                         whileHover={!animateProject ? { scale: 1.02, cursor:"pointer", boxShadow: '0 10px 20px rgba(0,0,0,0.25)',

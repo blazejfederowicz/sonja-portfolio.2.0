@@ -49,7 +49,7 @@ export default function About(){
                             <Reveal>
                                 <div
                                     className={`h-[2.5em] w-[2.5em] border-salmon relative border-2 rounded-full after:content-[''] after:block after:h-[2px] after:w-[calc(var(--child-width)-2.5em)] after:bg-salmon after:absolute after:left-full after:top-1/2 after:-translate-y-1/2 before:content-['skill'] before:font-alta before:text-salmon sm:before:text-xl before:absolute sm:before:-top-2 sm:before:left-[130%] before:-top-1 before:left-[110%]`}
-                                    style={{ ['--child-width' as any]: childWidth, ['--tag' as any]: e.tag } as React.CSSProperties}
+                                    style={{ ['--child-width']: childWidth, ['--tag']: e.tag } as React.CSSProperties}
                                 >
                                     <i className="bi bi-check absolute flex top-1/2 left-1/2 -translate-1/2 text-3xl text-salmon"></i>
                                 </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { UseFetchProps } from "./useFetch.interface";
 
 export default function useFetch({fetchFn, deps = []}: UseFetchProps) {
-    const [ data, setData ] = useState<Object | null | []>(null)
+    const [ data, setData ] = useState<object | null | []>(null)
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState<string | null>(null);
 

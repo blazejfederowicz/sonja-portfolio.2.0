@@ -1,4 +1,4 @@
-import { ACTION_TYPES, FULLFIELD_MESSAGE, REJECTED_MESSAGE } from '@/constants';
+import { FORM_TYPES, FULLFIELD_MESSAGE, REJECTED_MESSAGE } from '@/constants';
 import { Action, State } from '@/types/Contact.interface';
 import emailjs from '@emailjs/browser';
 
@@ -14,18 +14,18 @@ const emailService = (form:HTMLFormElement, dispatch: React.Dispatch<Action>) =>
         (response) => {
             console.log(response.status, response.text)
             dispatch({
-                type:ACTION_TYPES.SET_FULLFIELD, 
+                type:FORM_TYPES.SET_FULLFIELD, 
                 payload: FULLFIELD_MESSAGE as keyof State
             })
             setTimeout(() => {
-                dispatch({type:ACTION_TYPES.CLEAR_FORM});
+                dispatch({type:FORM_TYPES.CLEAR_FORM});
             }, 5000);
         },
         (error) => {
             console.log(error)
-            dispatch({type:ACTION_TYPES.SET_REJECTED, payload: REJECTED_MESSAGE as keyof State})
+            dispatch({type:FORM_TYPES.SET_REJECTED, payload: REJECTED_MESSAGE as keyof State})
             setTimeout(() => {
-                dispatch({type:ACTION_TYPES.CLEAR_FORM});
+                dispatch({type:FORM_TYPES.CLEAR_FORM});
             }, 3000);
         }
     );

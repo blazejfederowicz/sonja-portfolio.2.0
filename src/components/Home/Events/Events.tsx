@@ -79,7 +79,7 @@ export default function Events(){
                             Array.isArray(eventState.eventList) && eventState.eventList.map((e,i,arr)=>(
                                 <div key={i}>
                                     <div className="w-full flex relative pr-10 sm:pr-20">
-                                        <div ref={ref} className={`grow ${height<400?'h-[var(--height)]':'h-[25em]'} sm:h-[30em]  bg-no-repeat bg-cover bg-center flex items-end re sm:block`} style={{backgroundImage:`url(${!!e.thumbnail?e.thumbnail:IMAGE_PLACEHOLDER})`,['--height'as any]:`${height}px`} as React.CSSProperties}>
+                                        <div ref={ref} className={`grow ${height<400?'h-[var(--height)]':'h-[25em]'} sm:h-[30em]  bg-no-repeat bg-cover bg-center flex items-end re sm:block`} style={{backgroundImage:`url(${!!e.thumbnail?e.thumbnail:IMAGE_PLACEHOLDER})`,['--height']:`${height}px`} as React.CSSProperties}>
                                             <div className="w-[15em] md:w-[22em] bg-white-almost h-[280px] sm:h-full py-10 sm:py-20 px-5 md:px-0 flex justify-center text-wood-brown flex-col shadow-2xl translate-y-1/3 sm:translate-0">
                                                 <Reveal>
                                                     <h5 className='md:text-xl sm:text-lg text-base tracking-wider md:pl-14 md:pr-5 font-semibold'>{e.title}</h5>

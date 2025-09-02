@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 
 export default function Project(){
     const {slug} = useParams()
-    const {findProject, projectState} = useProject()
+    const {findProject} = useProject()
     const currentProject = findProject(slug as string)
 
     if(!!!currentProject) return <Error errorMessage=""/>

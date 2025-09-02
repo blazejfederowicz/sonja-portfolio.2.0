@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     const base64 = thumbnail.split(',')[1];
     const buffer = Buffer.from(base64, 'base64');
 
-    const { data: storageData, error: storageError } = await supabase.storage
+    const { error: storageError } = await supabase.storage
         .from("images")
         .upload(filename, buffer, {
             contentType

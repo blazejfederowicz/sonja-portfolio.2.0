@@ -32,7 +32,7 @@ const skillSlice = createSlice({
                 state.isLoading = false;
                 state.errorMessage = action.error.message || UNKNOWN_ERROR
             })
-            .addCase(postSkill.fulfilled, (state, action)=>{
+            .addCase(postSkill.fulfilled, (state)=>{
                 state.isLoading = false
             })
             .addCase(postSkill.pending,(state)=>{

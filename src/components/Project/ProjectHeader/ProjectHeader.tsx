@@ -5,7 +5,6 @@ import { PROJECT, PROJECT_BUTTON_TEXT } from '@/constants'
 import { Reveal } from '@/features/Reveal/Reveal'
 import ProjectButton from '@/common/ProjectButton/ProjectButton'
 import { usePathname } from 'next/navigation'
-import { Project } from '@/types/common'
 import { ProjectComponentProp } from '../ProjectComponent.interface'
 import useScreen from '@/hooks/useScreen/useScreen'
 
