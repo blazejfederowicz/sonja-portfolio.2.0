@@ -14,3 +14,14 @@ export const handleErrors = <T extends Record<string, string>>(errors: T) =>
         }
         return acc;
     }, {} as Record<string, string>);
+
+export const getReducedString = (string:string, length:number): string=>{
+    if (!string) return "N/A";
+
+    return string.length > length? string.slice(0,length)+"..." : string;
+}
+
+export const mapObject = (obj:any) =>{
+    return obj.map((e:any) => getReducedString(e.title as string, 25))
+}
+

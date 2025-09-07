@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body
-        className={`antialiased`}
+        className={`antialiased overflow-x-hidden`}
       >
         <Providers>
           {children}

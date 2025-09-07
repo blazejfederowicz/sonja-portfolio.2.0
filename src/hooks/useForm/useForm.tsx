@@ -15,11 +15,11 @@ export default function useForm<T extends Record<string, any>>(initialValues:T){
     });
 
     const handleChange = async (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.currentTarget;
         const files = (e.currentTarget as HTMLInputElement).files;
-
+        
         if (files && files[0]) {
             const base64 = await fileToBase64(files[0]);
             setState(prev => ({ ...prev, [name]: base64 }));

@@ -5,7 +5,7 @@ import { Reveal } from '@/features/Reveal/Reveal';
 import Marquee from '@/features/Marquee/Marquee';
 import Image from 'next/image';
 import useScreen from '@/hooks/useScreen/useScreen';
-import { CV_BUTTON, HERO_PARAGRAPH, HERO_TAG, NAME, PROJECTS_BUTTON, SURNAME } from '@/constants';
+import { CV_BUTTON, HERO_PARAGRAPH, NAME, PROJECTS_BUTTON, SURNAME } from '@/constants';
 import CvButton from '@/common/CvButton/CvButton';
 import SecondaryButton from '@/common/SecondaryButton/SecondaryButton';
 
@@ -24,11 +24,7 @@ export default function Hero(){
     
     return(<>
         <section id="home" className="min-h-lvh flex flex-col pt-[80px]">
-            <div className="w-fit relative my-auto grow grid grid-rows-[1fr_repeat(4,auto)_1fr] lg:grid-rows-3 max-h-full lg:max-h-[400px] lg:grid-cols-[repeat(3,auto)] grid-cols-2 gap-[1em] md:gap-[2em] container mx-auto px-2">
-                <div className="absolute left-2 -bottom-0 translate-y-1/2 flex-row-reverse gap-[1em] hidden lg:flex items-center">
-                    <div className="w-[4em] h-[1px] bg-black/50"></div>
-                    <p className="font-alta text-sm text-black/50">{HERO_TAG}</p>
-                </div>
+            <div className="w-fit relative my-auto grow grid grid-rows-[1fr_repeat(4,auto)_1fr] lg:grid-rows-3 max-h-full lg:max-h-[400px] lg:grid-cols-[repeat(1,auto)] grid-cols-2 gap-[1em] md:gap-[2em] container mx-auto px-2">
                 <div className=" flex items-center justify-center lg:justify-end word1-grid-area overflow-hidden">
                     <Reveal>
                         <h1 className="font-alta font-normal tracking-widest small text-4xl sm:text-6xl lg:text-7xl text-end text-zinc-700">{NAME}</h1>
@@ -77,12 +73,12 @@ export default function Hero(){
                         <h1 className="font-alta font-bold small text-salmon text-shadow-lg text-5xl sm:text-6xl md:text-7xl">{SURNAME}</h1>
                     </motion.div>
                 </div>
-                <div className="row-span-2 ben-grid-area">
+                <div className="row-span-2 ben-grid-area lg:hidden">
                     <Reveal>
                         <Image width={500} height={500}src='/images/tample.svg' className="lg:h-[14em] h-[9em] object-contain w-fit" alt="bigBen"/>
                     </Reveal>
                 </div>
-                <div className="flex sm:gap-8 gap-2 md:gap-4 xl:gap-8 justify-center my-5 col-span-2 md:col-span-1  items-center word3-grid-area">
+                <div className="flex sm:gap-8 gap-2 md:gap-4 xl:gap-8 justify-center my-5 col-span-2      items-center word3-grid-area">
                     <Reveal>
                         <h1 className="font-alta text-end font-light w-fit tracking-widest text-black/70 text-xl sm:text-3xl md:text-4xl">{HERO_PARAGRAPH}</h1>
                     </Reveal>
@@ -92,7 +88,7 @@ export default function Hero(){
                 </div>
                 <CvButton download="/CV.pdf" text={CV_BUTTON}/>
                 <SecondaryButton text={PROJECTS_BUTTON} href='#projects'/>
-                <div className="arch-grid-area flex justify-end items-end lg:justify-start">
+                <div className="arch-grid-area flex justify-end items-end lg:justify-start lg:hidden">
                     <Reveal customStyle="shrink">
                             <Image width={500} height={500} className='h-[8em] object-contain w-fit' src='/images/rect.svg' alt="arch"/>
                     </Reveal>

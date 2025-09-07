@@ -34,3 +34,7 @@ export interface Event{
     side_text: string;
     thumbnail: string
 }
+
+export type ID={
+    id:string
+}

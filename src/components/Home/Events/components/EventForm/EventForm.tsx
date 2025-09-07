@@ -23,8 +23,6 @@ export default function EventForm(){
                         })}
                         onChange={handleChange}
                         error={error[input.id as keyof typeof error]}
-                        labelClass="text-white"
-                        inputClass="text-white"
                     />
                 ))
             }

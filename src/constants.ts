@@ -1,17 +1,5 @@
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
-export const IMAGES_ROUTES={
-    project1: '/images/project1.jpg',
-    project2: '/images/project2.jpg',
-    project3: '/images/project3.jpg',
-    pavilonFirst: '/images/pavilonFirst.jpg',
-    pavilonSecond: '/images/pavilonSecon.jpg',
-    denistyFirst: '/images/denistyFirst.jpg',
-    denistySecond: '/images/denistySecond.jpg',
-    wetlandFirst: '/images/wetlandFirst.jpg',
-    wetlandSecond: '/images/wetlandSecond.jpg'
-};
-
 // Navbar
 export const NAV_ROUTES=[
     {name:"Home", value:"/"},
@@ -40,41 +28,46 @@ export const FOOTER_ROUTES = [
 ];
 
 // Marquee
-export const MARQUEE_IMAGES=[{
-        src: '/images/photoshop.svg',
-        name:"Photoshop"
-    },
-    {
-        src:'/images/indesign.svg',
-        name:"InDesign"
-    },
-    {
-        src: '/images/illustrator.svg',
-        name:"Adobe illustrator"
-    },
+export const MARQUEE_IMAGES=[
     {
         src: '/images/autocad.png',
         name:"Autocad"
-    },
-    {
-        src: '/images/rhinoceros.svg',
-        name:"Rhinoceros"
-    },
-    {
-        src: '/images/Lumion.svg',
-        name:"Lumion"
     },
     {
         src: '/images/Revit.png',
         name:"Revit"
     },
     {
-        src: '/images/enscape.png',
-        name:"Enscape"
+        src: '/images/archicad.png',
+        name: "Archicad"
+    },
+    {
+        src: '/images/rhinoceros.svg',
+        name:"Rhinoceros"
     },
     {
         src: '/images/sketchup.svg',
         name:"Sketchup"
+    },
+     {
+        src: '/images/enscape.png',
+        name:"Enscape"
+    },
+    {
+        src: '/images/Lumion.svg',
+        name:"Lumion"
+    },
+    {
+        src: '/images/photoshop.svg',
+        name:"Photoshop"
+    },
+    {
+        src: '/images/illustrator.svg',
+        name:"Adobe illustrator"
+    },
+    {
+        src:'/images/indesign.svg',
+        name:"InDesign"
     },
 ];
 
@@ -89,7 +82,6 @@ export const NOT_FOUND = "Not Found";
 //Home
 export const CONTACT_TEXT = "Contact";
 export const PROJECTS_TEXT = "Projects";
-export const HERO_TAG = "Façade";
 export const SURNAME = "Pengili";
 export const NAME = "Sonja";
 export const HERO_PARAGRAPH = "Architecture student";
@@ -220,7 +212,7 @@ export const AUTH_EMAIL = "email"
 
 //Modal
 export const CANCEL = "CANCEL"
-export const SAVE = "SAVE"
+export const SAVE = "CONFIRM"
 export const EDIT = "EDIT SECTION"
 export const SKILL_FORM_INPUTS = [
     {id:"tag", label:"Skill Tag", type:"text", placeholder:"Skill tag", as:"input" as "input"},
@@ -231,6 +223,9 @@ export const SKILL_FORM_INPUTS = [
 export const SKILL_FORM_ID = "skill_form"
 export const EVENT_FORM_ID = "event_form"
 export const PROJECT_FORM_ID = "project_form"
+export const DELETE_SKILL_ID = "delete_skill"
+export const DELETE_EVENT_ID = "delete_event"
+export const DELETE_PROJECT_ID = "delete_project"
 
 export const EVENT_FORM_INPUTS = [
     {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
@@ -257,3 +252,9 @@ export const TABLES = {
     events:"events",
     projects:"projects"
 }
+
+//Delete
+export const DELETE_PARAGRAPH = "Are you sure, that you want to remove: "
+export const DELETE_HEADLINE = "Remove"
+export const DELETE_BUTTON = "DELETE"
+export const CHOOSE_OPTION = "Choose an option"

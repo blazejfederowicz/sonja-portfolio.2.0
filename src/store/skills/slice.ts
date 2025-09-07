@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {SkillState } from "./reducer.interface";
-import { fetchSkills, postSkill } from "./thunk";
+import { fetchSkills, postSkill, removeSkill } from "./thunk";
 import { UNKNOWN_ERROR } from "@/constants";
 import { Skill } from "@/types/common";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -39,6 +39,16 @@ const skillSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(postSkill.rejected,(state, action)=>{
+                state.isLoading = false;
+                state.errorMessage = action.error.message || UNKNOWN_ERROR
+            })
+            .addCase(removeSkill.fulfilled, (state)=>{
+                state.isLoading = false
+            })
+            .addCase(removeSkill.pending,(state)=>{
+                state.isLoading = true;
+            })
+            .addCase(removeSkill.rejected,(state, action)=>{
                 state.isLoading = false;
                 state.errorMessage = action.error.message || UNKNOWN_ERROR
             })

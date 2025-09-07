@@ -21,10 +21,10 @@ export default function Marquee(){
             >
             {MARQUEE_IMAGES.map((software,index)=>(
                 <div key={index} className="flex items-center gap-10 ">
-                    <h3 className="text-2xl md:text-4xl font-alta text-wood-brown">{software.name}</h3>
                     <div className="md:w-[4em] w-[2.5em]">
                         <Image width={500} height={500} priority src={software.src} alt={software.name}/>
                     </div>
+                    <h3 className="text-2xl md:text-4xl font-alta text-wood-brown">{software.name}</h3>
                 </div>
             ))}
             </motion.div>

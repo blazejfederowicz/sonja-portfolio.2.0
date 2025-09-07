@@ -1,6 +1,6 @@
 "use client"
 import Tag from "@/common/Tag/Tag"
-import { ABOUT_TEXT, SKILL_FORM_ID } from "@/constants"
+import { ABOUT_TEXT, DELETE_SKILL_ID, EDIT, SKILL_FORM_ID } from "@/constants"
 import { Reveal } from "@/features/Reveal/Reveal"
 import { useEffect, useRef, useState } from "react"
 import Error from "@/components/Shared/Error/Error"
@@ -8,13 +8,13 @@ import Loading from "@/components/Shared/Loading/Loading"
 import useSkill from "@/hooks/useSkill/useSkill"
 import Modal from "@/components/Modal/Modal"
 import SkillForm from "./components/SkillForm/SkillForm"
+import Delete from "@/common/Delete/Delete"
 
 
 export default function About(){
     const parentRef = useRef<HTMLDivElement>(null)
     const [childWidth, setChildWidth] = useState<string | number>(0)
-    const [open, setOpen] = useState(false)
-    const {skillState} = useSkill()
+    const {skillState, deleteSkill} = useSkill()
 
     useEffect(()=>{
          const updateWidth = ()=>{
@@ -35,9 +35,10 @@ export default function About(){
         <section id="about" className="container mx-auto px-2 pt-22 mb-22">
             <div className="flex container px-2 mx-auto gap-[1em]">
                 <Tag text={ABOUT_TEXT}/>
-                <Modal headline={ABOUT_TEXT} open={open} setOpen={setOpen} form={SKILL_FORM_ID}>
+                <Modal buttonColor='bg-blue-600' headline={ABOUT_TEXT} form={SKILL_FORM_ID} buttonText={EDIT}>
                     <SkillForm/>
                 </Modal>
+                <Delete formId={DELETE_SKILL_ID} data={skillState.skillList} dispatch={deleteSkill}/>
             </div>
             <div className={`${!!skillState.errorMessage || skillState.isLoading?"":"grid"} grid-cols-1 sm:grid-cols-2 mx-auto gap-[2em] max-w-[420px] sm:max-w-[700px] w-full mt-24`}>
                 {
@@ -57,7 +58,7 @@ export default function About(){
                         </div>
                         <div className="flex flex-col items-start justify-center mx-10 sm:mx-5 md:mx-10 text-gray-800">
                             <Reveal>
-                                <h4 className="font-bold text-2xl sm:text-2xl">{e.title}</h4>
+                                <h4 className="font-bold text-2xl sm:text-2xl break-words">{e.title}</h4>
                             </Reveal>
                             <Reveal>
                                 <p className="sm:text-2xl text-lg mt-2">{e.short_description}</p>

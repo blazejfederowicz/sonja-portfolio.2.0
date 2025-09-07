@@ -26,8 +26,6 @@ export default function SkillForm(){
                         value={state[input.id as keyof typeof state]} 
                         onChange={handleChange}
                         error={error[input.id as keyof typeof error]}
-                        labelClass="text-white"
-                        inputClass="text-white"
                     />
                 ))
             }

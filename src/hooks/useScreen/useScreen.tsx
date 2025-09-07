@@ -17,7 +17,13 @@ export default function useScreen(){
 
         handleWindowSize()
 
+        window.addEventListener("load", handleWindowSize)
         window.addEventListener("resize", handleWindowSize)
+
+        return ()=>{
+            window.removeEventListener("load", handleWindowSize)
+            window.removeEventListener("resize", handleWindowSize)
+        }
     },[])
 
     return {

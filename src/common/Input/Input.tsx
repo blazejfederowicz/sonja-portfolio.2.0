@@ -1,4 +1,6 @@
+import { getReducedString } from "@/lib/getFormHelpers";
 import { InputProps } from "./Input.interface";
+import { CHOOSE_OPTION } from "@/constants";
 
 const INITIAL_INPUT_CLASS = "flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium ring-offset-salmon2 ring-salmon file:text-white text-gray-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-gray-400/20 border-zinc-50 mt-2 mb-0"
 
@@ -14,9 +16,12 @@ export default function Input<T extends React.ElementType = "input">({
             )}
 
              {as === "select" ? 
-                <Component className={`${INITIAL_INPUT_CLASS} ${inputClass}`} id={id} name={id} {...props}>
-                    {options?.map((e,i)=>(
-                        <option key={`option-${i}`}>{e}</option>
+                <Component className={`${INITIAL_INPUT_CLASS} ${inputClass} cursor-pointer`} id={id} name={id} {...props}>
+                    <option value="" disabled>
+                        {CHOOSE_OPTION}
+                    </option>
+                    {options?.map((e)=>(
+                        <option key={`option-${e.id}`} value={e.id}>{getReducedString(e.title,25)}</option>
                     ))}
                 </Component> 
                 : 
