@@ -1,32 +1,25 @@
-import { handleErrors } from "@/lib/getFormHelpers";
+import { fileToBase64, handleErrors } from "@/lib/getFormHelpers";
 import { useState } from "react";
 
 export default function useForm<T extends Record<string, any>>(initialValues:T){
     const [state, setState] = useState<T>(initialValues)
     const [error, setError] = useState<Partial<Record<keyof T, string>>>({})
 
-    const fileToBase64 = (file: File): Promise<string> =>
-        new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
-    });
-
     const handleChange = async (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
-        const { name, value } = e.currentTarget;
+        const { name, value, type } = e.currentTarget;
+
+        let fieldValue: string | boolean = value;
         const files = (e.currentTarget as HTMLInputElement).files;
-        
-        if (files && files[0]) {
-            const base64 = await fileToBase64(files[0]);
-            setState(prev => ({ ...prev, [name]: base64 }));
-        } else {
-            setState(prev => ({ ...prev, [name]: value }));
+
+        if (e.currentTarget instanceof HTMLInputElement && type === "checkbox") {
+            fieldValue = e.currentTarget.checked;
+        } else if(files && files[0]){
+            fieldValue =  await fileToBase64(files[0]);
         }
 
+        setState(prev => ({ ...prev, [name]: fieldValue }));
         setError(prev => ({ ...prev, [name]: "" }));
     };
 

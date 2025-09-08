@@ -10,9 +10,9 @@ export default function Input<T extends React.ElementType = "input">({
     const Component = as || "input";
 
     return (
-        <div className="space-y-2">
+        <div className={`space-y-2 ${props.type === "checkbox" ? "flex items-center justify-between mb-6 mt-3":""}`}>
             {label && (
-                <label className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${labelClass}`} htmlFor={id}>{label}</label>
+                <label className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${labelClass} ${props.type === "checkbox" ? "m-0" : ""}`} htmlFor={id}>{label}</label>
             )}
 
              {as === "select" ? 
@@ -24,6 +24,9 @@ export default function Input<T extends React.ElementType = "input">({
                         <option key={`option-${i}`} value={e.value}>{getReducedString(e.name,25)}</option>
                     ))}
                 </Component> 
+                : props.type === "checkbox" 
+                ?
+                <Component className={``} id={id} name={id} {...props}/>
                 : 
                 <Component className={`${INITIAL_INPUT_CLASS} ${inputClass} ${as==="textarea"?"min-h-[100px]":""}`} id={id} name={id} {...props}/>
             }
