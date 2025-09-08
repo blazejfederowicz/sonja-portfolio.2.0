@@ -20,8 +20,8 @@ export default function Input<T extends React.ElementType = "input">({
                     <option value="" disabled>
                         {CHOOSE_OPTION}
                     </option>
-                    {options?.map((e)=>(
-                        <option key={`option-${e.id}`} value={e.id}>{getReducedString(e.title,25)}</option>
+                    {options?.map((e, i)=>(
+                        <option key={`option-${i}`} value={e.value}>{getReducedString(e.name,25)}</option>
                     ))}
                 </Component> 
                 : 

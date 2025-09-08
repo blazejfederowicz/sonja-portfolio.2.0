@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {EventState } from "./reducer.interface";
 import { UNKNOWN_ERROR } from "@/constants";
 import { fetchEvents, postEvent, removeEvent } from "./thunk";
-import { Event } from "@/types/common";
+import { EventProp } from "@/types/common";
 
 const eventsInitialState: EventState = {
     eventList: [],
@@ -14,7 +14,7 @@ const eventSlice = createSlice({
     name: 'events',
     initialState: eventsInitialState,
     reducers:{
-        addSkill(state, action: PayloadAction<Event>) {
+        addEvent(state, action: PayloadAction<EventProp>) {
             state.eventList.push(action.payload);
         },
     },
@@ -55,7 +55,8 @@ const eventSlice = createSlice({
     }
 })
 
-// export const {
-// } = projectSlice.actions;
+export const {
+    addEvent
+} = eventSlice.actions;
 
 export default eventSlice.reducer;

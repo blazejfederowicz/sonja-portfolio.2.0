@@ -24,8 +24,8 @@ export const postSkill = createAsyncThunk<Skill, {skill:Skill}>(
 export const removeSkill = createAsyncThunk(
   ACTION_TYPES.removeSkill,
   async (id:ID) => {
-    const response = await axios.delete(API_ROUTES.skills, { data: { ...id } });
-
+    const response = await axios.delete(API_ROUTES.skills, { data: id });
+    
     return response.data;
   }
 );

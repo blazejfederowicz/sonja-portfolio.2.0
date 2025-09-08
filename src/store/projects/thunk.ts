@@ -15,7 +15,7 @@ export const fetchProjects = createAsyncThunk<Project[]>(
 export const removeProject = createAsyncThunk(
   ACTION_TYPES.removeProject,
   async (id:ID) => {
-    const response = await axios.delete(API_ROUTES.projects, { data: { ...id } });
+    const response = await axios.delete(API_ROUTES.projects, { data: id });
 
     return response.data;
   }

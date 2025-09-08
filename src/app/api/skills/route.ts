@@ -1,8 +1,8 @@
 import { TABLES } from "@/constants";
-import supabase from "@/lib/supabaseClient";
+import supabaseAdmin from "@/lib/supabaseAdmin";
 
 export async function GET() {
-    const {data, error} = await supabase
+    const {data, error} = await supabaseAdmin
         .from(TABLES.skills)
         .select('*')
 
@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(req: Request) {
   const body = await req.json();
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from(TABLES.skills)
     .insert([body])
     .select()
@@ -31,17 +31,17 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const body = await req.json();
-  const { id } = await body
+    const body = await req.json();
+    const { id } = await body
 
-  const { data, error } = await supabase
-    .from(TABLES.skills)
-    .delete()
-    .eq('id',parseInt(id));
+    const { data, error } = await supabaseAdmin
+      .from(TABLES.skills)
+      .delete()
+      .eq('id',parseInt(id));
 
-  if (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-  }
+    if (error) {
+      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    }
 
-  return new Response(JSON.stringify(data), { status: 200 });
+    return new Response(JSON.stringify(data), { status: 200 });
 }

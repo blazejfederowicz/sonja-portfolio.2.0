@@ -1,5 +1,6 @@
 import Input from "@/common/Input/Input";
-import { EVENT_FORM_ID, EVENT_FORM_INPUTS } from "@/constants";
+import { RealtimeListener } from "@/components/RealtimeListener/RealtimeListener";
+import { EVENT_FORM_ID, EVENT_FORM_INPUTS, TABLES } from "@/constants";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useForm from "@/hooks/useForm/useForm";
 
@@ -10,9 +11,13 @@ export default function EventForm(){
         short_description:"",
         side_text:""
     })
-    const { dispatchEvent } = useEvents()
+    const { dispatchEvent, newEvent } = useEvents()
 
-    return(
+    return(<>
+        <RealtimeListener 
+            table={TABLES.events}
+            onInsert={newEvent} 
+        />
         <form id={EVENT_FORM_ID} onSubmit={handleSubmit(dispatchEvent)}>
             {
                 EVENT_FORM_INPUTS.map((input, index)=>(
@@ -27,5 +32,5 @@ export default function EventForm(){
                 ))
             }
         </form>
-    )
+    </>)
 }

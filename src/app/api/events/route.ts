@@ -1,8 +1,8 @@
 import { TABLES } from "@/constants";
-import supabase from "@/lib/supabaseClient";
+import supabaseAdmin from "@/lib/supabaseAdmin";
 
 export async function GET() {
-    const {data, error} = await supabase
+    const {data, error} = await supabaseAdmin
         .from(TABLES.events)
         .select('*')
         .order('created_at', { ascending: false });
@@ -11,7 +11,17 @@ export async function GET() {
         return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     }
 
-    return new Response(JSON.stringify(data), {status: 200})
+    const dataWithUrls = data?.map((row) => {
+        if (row.thumbnail) {
+            const { data: urlData } = supabaseAdmin.storage
+                .from("images")
+                .getPublicUrl(row.thumbnail);
+            return { ...row,  thumbnailUrl: urlData.publicUrl,  };
+        }
+        return row;
+    });
+
+    return new Response(JSON.stringify(dataWithUrls), {status: 200})
 }
 
 export async function POST(req: Request) {
@@ -24,7 +34,7 @@ export async function POST(req: Request) {
     const base64 = thumbnail.split(',')[1];
     const buffer = Buffer.from(base64, 'base64');
 
-    const { error: storageError } = await supabase.storage
+    const { error: storageError } = await supabaseAdmin.storage
         .from("images")
         .upload(filename, buffer, {
             contentType
@@ -32,14 +42,10 @@ export async function POST(req: Request) {
 
     if (storageError) return new Response(JSON.stringify({ error: storageError.message }), { status: 500 });
 
-    const { data: imageData } = supabase.storage
-        .from("images")
-        .getPublicUrl(filename);
-
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
         .from(TABLES.events)
         .insert([{ 
-            title, short_description, thumbnail: imageData.publicUrl, side_text 
+            title, short_description, thumbnail: filename, side_text 
         }])
         .select()
         .single();
@@ -52,17 +58,26 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const body = await req.json();
-  const { id } = await body
+    const body = await req.json();
+    const { id, path } = body;
 
-  const { data, error } = await supabase
-    .from(TABLES.events)
-    .delete()
-    .eq('id',parseInt(id));
+    const { error:storageError } = await supabaseAdmin.storage
+        .from('images')
+        .remove([path])
 
-  if (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-  }
+    if (storageError) {
+        return new Response(JSON.stringify({ error: storageError.message }), { status: 500 });
+    }
 
-  return new Response(JSON.stringify(data), { status: 200 });
+    const { data, error } = await supabaseAdmin
+        .from(TABLES.events)
+        .delete()
+        .eq('id',parseInt(id));
+
+    if (error) {
+        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    }
+
+
+    return new Response(JSON.stringify(data), { status: 200 });
 }

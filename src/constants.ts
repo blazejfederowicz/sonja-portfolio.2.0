@@ -240,7 +240,9 @@ export const PROJECT_FORM_INPUTS = [
     {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
     {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
     {id:"height", label:"Thumbnail Image height", as: "select" as "select" , options:[
-        200, 400, 600
+        {value:200, name:"200"},
+        {value:400, name:"400"},
+        {value:600, name:"600"},
     ]},
     
 ];

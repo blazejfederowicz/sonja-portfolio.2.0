@@ -6,10 +6,18 @@ import useForm from "@/hooks/useForm/useForm";
 import { useEffect, useState } from "react";
 
 export default function Delete({formId, dispatch, data}:DeleteProps){
+    const [select, setSelect] = useState([{value: "", name: ""}])
     const [title, setTitle] = useState(CHOOSE_OPTION)
     const { state, handleChange, handleSubmit } = useForm({
             id:"",
         })
+
+    useEffect(() => {
+        const arr = data.map((e: any) => ({ value: e.id, name: e.title }));
+
+        setSelect(arr);
+    }, [data]);
+
 
     useEffect(()=>{
         const foundTitle = data.find((e:any)=> e.id === parseInt(state.id))?.title || CHOOSE_OPTION
@@ -23,7 +31,7 @@ export default function Delete({formId, dispatch, data}:DeleteProps){
                 <p className="tracking-wide text-neutral-700">{DELETE_PARAGRAPH}<span className="text-red-400 font-bold">{title}</span></p>
             </Modal>
            <form id={formId} onSubmit={handleSubmit(dispatch)}>
-                <Input as="select" id="id" options={data} value={state.id} onChange={handleChange} />
+                <Input as="select" id="id" options={select} value={state.id} onChange={handleChange} />
             </form>
         </div>
     )

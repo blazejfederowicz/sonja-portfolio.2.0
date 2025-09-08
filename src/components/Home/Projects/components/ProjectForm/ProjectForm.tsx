@@ -30,7 +30,7 @@ export default function ProjectForm(){
                 ))
             }
             <div className="mt-2">
-                <DialogTitle as="h3" className="text-base font-semibold text-white">
+                <DialogTitle as="h3" className="text-lg font-semibold tracking-wider ">
                     {CONTENT}
                 </DialogTitle>
                 <FormButton text={CONTENT_TEXT} icon="bi bi-plus text-xl" click={handleClick}/>

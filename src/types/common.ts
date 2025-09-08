@@ -32,9 +32,14 @@ export interface Event{
     title: string;
     short_description: string;
     side_text: string;
-    thumbnail: string
+    thumbnail: string;
 }
 
 export type ID={
-    id:string
+    id:number
 }
+export interface EventProp extends Event, ID{
+    thumbnailUrl:string
+}
+
+

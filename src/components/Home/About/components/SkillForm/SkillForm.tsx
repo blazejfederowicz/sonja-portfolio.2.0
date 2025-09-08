@@ -3,7 +3,6 @@ import { RealtimeListener } from "@/components/RealtimeListener/RealtimeListener
 import { SKILL_FORM_ID, SKILL_FORM_INPUTS, TABLES } from "@/constants";
 import useForm from "@/hooks/useForm/useForm";
 import useSkill from "@/hooks/useSkill/useSkill";
-import { addSkill } from "@/store/skills/slice";
 
 export default function SkillForm(){
     const {state, error, handleChange, handleSubmit} = useForm({
@@ -11,12 +10,12 @@ export default function SkillForm(){
         title:"",
         short_description:""
     })
-    const {dispatchSkill} = useSkill()
+    const {dispatchSkill, newSkill} = useSkill()
 
     return(<>
         <RealtimeListener 
             table={TABLES.skills}
-            onInsert={(row)=>addSkill(row)} 
+            onInsert={newSkill} 
         />
         <form id={SKILL_FORM_ID} onSubmit={handleSubmit(dispatchSkill)}>
             {
