@@ -1,4 +1,3 @@
-import { ProjectFormState } from "@/components/Home/Projects/components/ProjectForm/ProjectForm.interface";
 import { ACTION_TYPES, API_ROUTES } from "@/constants";
 import { ID, Project } from "@/types/common";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -13,7 +12,7 @@ export const fetchProjects = createAsyncThunk<Project[]>(
   }
 );
 
-export const postProject = createAsyncThunk<ProjectFormState, {project:ProjectFormState}>(
+export const postProject = createAsyncThunk<Project, {project:Project}>(
   ACTION_TYPES.addProject,
   async ({project}) => {
     const response = await axios.post(API_ROUTES.projects, project);
@@ -24,8 +23,8 @@ export const postProject = createAsyncThunk<ProjectFormState, {project:ProjectFo
 
 export const removeProject = createAsyncThunk(
   ACTION_TYPES.removeProject,
-  async (id:ID) => {
-    const response = await axios.delete(API_ROUTES.projects, { data: id });
+  async ({id, path}:{id:string, path:string | undefined}) => {
+  const response = await axios.delete(API_ROUTES.projects, { data: {id, path} });
 
     return response.data;
   }

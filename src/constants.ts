@@ -75,6 +75,7 @@ export const MARQUEE_IMAGES=[
 export const PROJECT_BUTTON_TEXT = "READ MORE" ;
 export const PROJECT = "PROJECT";
 export const PROJECT_TAG = "ARCHITECTURAL DESIGN";
+export const PROJECT_NOT_FOUND = "Project not found";
 
 //Not Found
 export const NOT_FOUND = "Not Found";
@@ -129,7 +130,7 @@ export const ABOUT = [{
 ];
 
 export const ABOUT_TEXT = "About";
-export const IMAGE_PLACEHOLDER = "https://placehold.co/600x400"
+export const IMAGE_PLACEHOLDER = "https://placehold.co/600x400/png"
 
 //Contact
 

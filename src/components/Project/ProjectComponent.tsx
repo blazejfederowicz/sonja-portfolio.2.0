@@ -12,7 +12,7 @@ export default function ProjectComponent({project}:ProjectComponentProp){
         <main>
             {
                 project.content.map((content, index)=>(
-                    <ContentSection key={`unique-${index}`} {...content}/>    
+                    <ContentSection key={`unique-${content.id}`} {...content}/>    
                 ))
             }
         </main>

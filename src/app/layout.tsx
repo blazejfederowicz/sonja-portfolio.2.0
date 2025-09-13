@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/store/providers";
+import PublicRoute from "@/components/PublicRoute/PublicRoute";
 
 export const metadata: Metadata = {
   title: "Sonja Pengili",
@@ -21,7 +22,9 @@ export default function RootLayout({
         className={`antialiased overflow-x-hidden`}
       >
         <Providers>
-          {children}
+          <PublicRoute>
+            {children}
+          </PublicRoute>
         </Providers>
       </body>
     </html>

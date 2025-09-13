@@ -1,7 +1,7 @@
-import { Project } from "@/types/common";
+import { Project, ProjectProp } from "@/types/common";
 
 export interface ProjectState{
-    projectList: Project[];
+    projectList: ProjectProp[];
     isLoading: boolean;
     errorMessage: string | null;
 }

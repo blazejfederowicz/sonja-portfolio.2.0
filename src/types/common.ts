@@ -4,22 +4,28 @@ export interface Children{
     children?: ReactNode
 }
 
-export interface ProjectContent {
-  image: string;
-  title: string;
-  content: string;
-  bgColor: string;
-  isReverse: boolean;
+export interface ContentItem {
+    id: string;
+    image?: string | null; 
+    name?: string;
+    bgColor?: string;
+    content?: string;
+    isReverse?: boolean;
 }
 
 export interface Project{
-    id: string;
-    title: string;
-    tag: string;
+    id?: number;
+    project_id: string;
     thumbnail: string;
-    height: string
+    tag: string;
+    title: string;
     short_description: string;
-    content: ProjectContent[]
+    height: number;
+    content: ContentItem[];
+}
+
+export interface ProjectProp extends Project{
+    thumbnailUrl: string;
 }
 
 export interface Skill{

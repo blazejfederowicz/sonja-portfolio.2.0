@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "@/constants";
+import { ERROR_MESSAGE, IMAGE_PLACEHOLDER } from "@/constants";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -33,3 +33,13 @@ export async function fileToBase64(file: File): Promise<string> {
     reader.onerror = (error) => reject(error);
   });
 }
+
+export const isValidUrl = (urlString: any): string => {
+  try {
+        new URL(urlString)
+        return urlString
+    } catch (_) {
+        return IMAGE_PLACEHOLDER
+    }
+}
+

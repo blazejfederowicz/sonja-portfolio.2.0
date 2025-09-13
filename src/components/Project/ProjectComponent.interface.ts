@@ -1,8 +1,8 @@
-import { Project, ProjectContent } from "@/types/common";
+import { ContentItem, ProjectProp } from "@/types/common";
 
 export interface ProjectComponentProp{
-    project: Project;
+    project: ProjectProp;
 }
 export interface ContentProp{
-    content: ProjectContent[];
+    content: ContentItem[];
 }

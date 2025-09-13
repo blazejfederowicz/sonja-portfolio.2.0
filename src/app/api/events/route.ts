@@ -1,4 +1,5 @@
 import { TABLES } from "@/constants";
+import { uploadBase64Image } from "@/lib/getBufferHelper";
 import supabaseAdmin from "@/lib/supabaseAdmin";
 
 export async function GET() {
@@ -27,34 +28,27 @@ export async function GET() {
 export async function POST(req: Request) {
     const body = await req.json();
     const { title, short_description, thumbnail, side_text } = body;
-    const matches = thumbnail.match(/^data:(.+);base64,(.*)$/);
-    const contentType = matches?.[1] || "application/octet-stream"; // fallback
 
-    const filename = `events/${Date.now()}-${title.replace(/\s+/g, '_')}.jpg`;
-    const base64 = thumbnail.split(',')[1];
-    const buffer = Buffer.from(base64, 'base64');
+    try{
+        const filename = `events/${Date.now()}-${title.replace(/\s+/g, '_')}.jpg`;
+        await uploadBase64Image(thumbnail, filename);
 
-    const { error: storageError } = await supabaseAdmin.storage
-        .from("images")
-        .upload(filename, buffer, {
-            contentType
-        });
+        const { data, error } = await supabaseAdmin
+            .from(TABLES.events)
+            .insert([{ 
+                title, short_description, thumbnail: filename, side_text 
+            }])
+            .select()
+            .single();
 
-    if (storageError) return new Response(JSON.stringify({ error: storageError.message }), { status: 500 });
+            console.log(error)
 
-    const { data, error } = await supabaseAdmin
-        .from(TABLES.events)
-        .insert([{ 
-            title, short_description, thumbnail: filename, side_text 
-        }])
-        .select()
-        .single();
-
-        console.log(error)
-
-    if (error) return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-
-    return new Response(JSON.stringify(data), { status: 200 });
+        if (error)  throw error
+        return new Response(JSON.stringify(data), { status: 200 });
+    } catch (error:any) {
+        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    }
+   
 }
 
 export async function DELETE(req: Request) {

@@ -3,16 +3,29 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { COPYRIGHT, FOOTER_ROUTES, LINK_TEXT, SOCIAL_LINKS, SOCIALS } from '@/constants'
 import useProject from '@/hooks/useProject/useProject'
+import { useEffect, useState } from 'react'
+import { useParams, usePathname } from 'next/navigation'
 
 export default function Footer (){
-    const {projectState} = useProject()
+    const [color, setColor] = useState("bg-white-almost")
+    const {projectState, findProject} = useProject()
+    const pathname = usePathname()
+    const {slug} = useParams()
+    const currentProject = findProject(slug as string)
+
+    useEffect(()=>{
+        if(pathname === `/project/${slug}`){
+            const newColor = !!currentProject ? currentProject.content[currentProject.content.length -1].bgColor : "bg-white-almost" 
+            setColor(newColor || "bg-white-almost")
+        }
+    },[pathname, slug, currentProject])
 
     return(<>
         <footer className="bg-zinc-100 relative">
             <div className="flex justify-between gap-[2em] mb-5">
-                <div className="w-[4em] ms-5 h-[2em] rounded-full relative bg-white-almost -translate-y-1/2"></div>
-                <div className="w-1/2 mx-auto -translate-y-1/2 h-[3em] rounded-b-full bg-white"></div>
-                <div className="w-[4em] me-5 h-[2em] rounded-full relative bg-white-almost -translate-y-1/2"></div>
+                <div className={`w-[4em] ms-5 h-[2em] rounded-full relative ${color} -translate-y-1/2`}></div>
+                <div className={`w-1/2 mx-auto -translate-y-1/2 h-[3em] rounded-b-full ${color}`}></div>
+                <div className={`w-[4em] me-5 h-[2em] rounded-full relative ${color} -translate-y-1/2`}></div>
             </div>
             <div className="container px-2 mx-auto mb-5  w-fit grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 items-start gap-[3em]  rounded-full ">
                 <div className="h-[10em] flex justify-center col-span-2 sm:col-span-3 md:col-span-1 ">

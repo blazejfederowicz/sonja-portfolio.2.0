@@ -11,6 +11,7 @@ import Modal from '@/components/Modal/Modal';
 import EventForm from './components/EventForm/EventForm';
 import useScreen from '@/hooks/useScreen/useScreen';
 import Delete from '@/common/Delete/Delete';
+import { isValidUrl } from '@/lib/getFormHelpers';
 
 
 export default function Events(){
@@ -93,7 +94,7 @@ export default function Events(){
                                                 <p className='mt-4 md:pl-14 md:pr-22 text-sm md:text-base'>{e.short_description}</p>
                                             </Reveal>
                                         </div>
-                                        <div ref={ref} className="grow bg-no-repeat bg-cover bg-center flex items-end re sm:block h-full" style={{backgroundImage:`url(${!!e.thumbnailUrl?e.thumbnailUrl:IMAGE_PLACEHOLDER})`}}/>
+                                        <div ref={ref} className="grow bg-no-repeat bg-cover bg-center flex items-end re sm:block h-full" style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`}}/>
                                         <h3 className="rotate-90 tracking-wider w-[1.5em] h-fit box-border flex items-center justify-center text-salmon2 font-alta text-4xl sm:text-6xl leading-none whitespace-nowrap absolute right-0 top-1/2 -translate-y-1/2"><Reveal>{e.side_text}</Reveal></h3>
                                     </div>
                                     {i < arr.length - 1 && (

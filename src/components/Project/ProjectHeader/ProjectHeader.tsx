@@ -7,6 +7,7 @@ import ProjectButton from '@/common/ProjectButton/ProjectButton'
 import { usePathname } from 'next/navigation'
 import { ProjectComponentProp } from '../ProjectComponent.interface'
 import useScreen from '@/hooks/useScreen/useScreen'
+import { isValidUrl } from '@/lib/getFormHelpers'
 
 
 export default function ProjectHeader({project}:ProjectComponentProp){
@@ -20,7 +21,7 @@ export default function ProjectHeader({project}:ProjectComponentProp){
     }
 
     return(
-        <motion.header key={pathname} className="w-full h-lvh bg-center bg-cover bg-no-repeat" style={{backgroundImage:`url(${project.thumbnail})`}}
+        <motion.header key={pathname} className="w-full h-lvh bg-center bg-cover bg-no-repeat" style={{backgroundImage:`url(${isValidUrl(project.thumbnailUrl)})`}}
             >
             <motion.div className="w-full h-full relative"
                 initial={false}

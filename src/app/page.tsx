@@ -8,14 +8,10 @@ import Hero from "@/components/Home/Hero/Hero";
 import Projects from "@/components/Home/Projects/Projects";
 import About from "@/components/Home/About/About";
 import Events from "@/components/Home/Events/Events";
-import { useAppDispatch } from "@/lib/hooks";
-import { fetchSkills } from "@/store/skills/thunk";
-import { fetchEvents } from "@/store/events/thunk";
-import { fetchProjects } from "@/store/projects/thunk";
+
 
 export default function Home() {
     const [footerPosition, setFooterPosition] = useState<null | DOMRect>(null)
-    const dispatch = useAppDispatch();
     const router = useRouter()
 
     const handleClick = (e: React.MouseEvent)=>{
@@ -25,9 +21,6 @@ export default function Home() {
     }
 
     useEffect(()=>{
-        dispatch(fetchSkills())
-        dispatch(fetchEvents())
-        dispatch(fetchProjects())
 
         document.body.classList.remove("overflow-hidden")
         const html=document.documentElement.classList;
@@ -35,7 +28,7 @@ export default function Home() {
         window.scrollTo(0,0)
 
         if(!html.contains("scroll-smooth")) {html.add("scroll-smooth")}
-    },[dispatch])
+    },[])
 
     return(
         <>

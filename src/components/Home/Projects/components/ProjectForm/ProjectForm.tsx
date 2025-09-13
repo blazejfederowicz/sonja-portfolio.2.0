@@ -4,14 +4,14 @@ import { CONTENT, CONTENT_TEXT, PROJECT_FORM_ID, PROJECT_FORM_INPUTS } from "@/c
 import useForm from "@/hooks/useForm/useForm";
 import { fileToBase64 } from "@/lib/getFormHelpers";
 import { DialogTitle } from "@headlessui/react";
-import { useState } from "react";
-import { ContentItem, ProjectFormState } from "./ProjectForm.interface";
+import useProject from "@/hooks/useProject/useProject";
+import { ContentItem, Project } from "@/types/common";
 
 
 export default function ProjectForm() {
-  const [formInputs, setFormInputs] = useState<ContentItem[]>([]);
   const { state, error, handleChange, handleSubmit, setState } =
-    useForm<ProjectFormState>({
+    useForm<Project>({
+      project_id: crypto.randomUUID(),
       thumbnail: "",
       tag: "",
       title: "",
@@ -19,6 +19,7 @@ export default function ProjectForm() {
       height: 200,
       content: [],
     });
+  const { addProject } = useProject()
 
   const handleClick = () => {
     const newContent: ContentItem = {
@@ -63,7 +64,7 @@ export default function ProjectForm() {
   };
 
   return (
-    <form id="PROJECT_FORM_ID" onSubmit={handleSubmit()}>
+    <form id={PROJECT_FORM_ID} onSubmit={handleSubmit(addProject)}>
         {PROJECT_FORM_INPUTS.map((input, index) => (
             <Input
             key={`form-${index}`} {...input}
@@ -98,7 +99,7 @@ export default function ProjectForm() {
                     label="Background"
                     value={item.bgColor}
                     options={[
-                        { value: " ", name: "Standard" },
+                        { value: "bg-white-almost", name: "Standard" },
                         { value: "bg-neutral-300", name: "Neutral" },
                     ]}
                     onChange={(e) => handleContentChange(e, item.id, "bgColor")}

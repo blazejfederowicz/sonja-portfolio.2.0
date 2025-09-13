@@ -11,6 +11,8 @@ import Modal from "@/components/Modal/Modal"
 import { DELETE_PROJECT_ID, EDIT, PROJECT_FORM_ID, PROJECTS_TEXT } from "@/constants"
 import ProjectForm from "./components/ProjectForm/ProjectForm"
 import Delete from "@/common/Delete/Delete"
+import { ProjectProp } from "@/types/common"
+import { isValidUrl } from "@/lib/getFormHelpers"
 
 
 export default function Projects(){
@@ -22,7 +24,7 @@ export default function Projects(){
 
 
     const handlePageTransition = (
-        element: { id: string; thumbnail: string; height?: string | number; title?: string },
+        element: Partial<ProjectProp>,
         event: React.MouseEvent<HTMLDivElement>
     ) => {
         if(!canClick) return;
@@ -34,8 +36,8 @@ export default function Projects(){
 
         setTimeout(() => {
             setAnimateProject({
-            index: element.id,
-            src: element.thumbnail,
+            index: element.project_id || "",
+            src: isValidUrl(element.thumbnailUrl),
             top: rect.top,
             left: rect.left,
             width: rect.width,
@@ -66,7 +68,7 @@ export default function Projects(){
                     <div className="flex w-full flex-col gap-[1em]">
                     {projectState.projectList.filter((_,i)=> i%2===0).map((e)=>{
                         return(
-                        <motion.div  key={`even-${e.id}`} className="group relative " 
+                        <motion.div  key={`even-${e.project_id}`} className="group relative " 
                         whileHover={!animateProject ? { scale: 1.02,cursor:"pointer", boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
                                     transition:{
                                         duration:0.28
@@ -74,7 +76,7 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover `} 
-                                style={{backgroundImage:`url(${e.thumbnail})`,height:e.height}}
+                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`,height:e.height}}
                                 initial={{transform:"translateX(-100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
@@ -88,7 +90,7 @@ export default function Projects(){
                     <div className="flex w-full flex-col gap-[1em]">
                     {projectState.projectList.filter((_,i)=> i%2!==0).map((e)=>{
                         return(
-                        <motion.div  key={`odd-${e.id}`} className="group relative "
+                        <motion.div  key={`odd-${e.project_id}`} className="group relative "
                         whileHover={!animateProject ? { scale: 1.02, cursor:"pointer", boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
                                     transition:{
                                         duration:0.28
@@ -96,7 +98,7 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover`}
-                                style={{backgroundImage:`url(${e.thumbnail})`,height:e.height}}
+                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`,height:e.height}}
                                 initial={{transform:"translateX(100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
