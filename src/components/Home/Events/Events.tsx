@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import {motion, useScroll, useTransform} from 'motion/react'
 import { Reveal } from '@/features/Reveal/Reveal';
 import Tag from '@/common/Tag/Tag';
-import { DELETE_EVENT_ID, EDIT, EVENT_FORM_ID, EVENTS_TEXT, IMAGE_PLACEHOLDER } from '@/constants';
+import { DELETE_EVENT_ID, EDIT, EVENT_FORM_ID, EVENTS_TEXT} from '@/constants';
 import Error from '@/components/Shared/Error/Error';
 import LoadingAnim from '@/features/LoadingAnim/LoadingAnim';
 import useEvents from '@/hooks/useEvents/useEvents';

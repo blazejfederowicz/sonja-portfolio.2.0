@@ -1,5 +1,5 @@
 import { ACTION_TYPES, API_ROUTES } from "@/constants";
-import { Event, EventProp, ID } from "@/types/common";
+import { Event, EventProp } from "@/types/common";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 

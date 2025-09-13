@@ -11,7 +11,7 @@ export default function ProjectComponent({project}:ProjectComponentProp){
     return(
         <main>
             {
-                project.content.map((content, index)=>(
+                project.content.map((content)=>(
                     <ContentSection key={`unique-${content.id}`} {...content}/>    
                 ))
             }

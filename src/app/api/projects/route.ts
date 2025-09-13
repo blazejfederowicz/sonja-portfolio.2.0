@@ -1,7 +1,7 @@
 import { TABLES } from "@/constants";
 import { uploadBase64Image } from "@/lib/getBufferHelper";
 import supabaseAdmin from "@/lib/supabaseAdmin";
-import { ContentItem, ProjectProp } from "@/types/common";
+import { ContentItem, Project } from "@/types/common";
 
 export async function GET() {
   const { data, error } = await supabaseAdmin
@@ -15,7 +15,7 @@ export async function GET() {
 
   const dataWithUrls = await Promise.all(
     (data || []).map(async (row) => {
-      const updatedRow: ProjectProp = { ...row };
+      const updatedRow: Project = { ...row };
 
       if (row.thumbnail) {
         const { data: urlData } = supabaseAdmin.storage
@@ -26,7 +26,7 @@ export async function GET() {
 
       if (row.content && Array.isArray(row.content)) {
         const updatedContent = await Promise.all(
-          row.content.map(async (item: any) => {
+          row.content.map(async (item: ContentItem) => {
             if (item.image) {
               const { data: urlData } = supabaseAdmin.storage
                 .from("images")
@@ -109,6 +109,6 @@ export async function DELETE(req: Request) {
 
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error:any){
-      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }

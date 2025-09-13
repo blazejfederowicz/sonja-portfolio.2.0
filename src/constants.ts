@@ -1,3 +1,5 @@
+import { ElementType } from "react";
+
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 // Navbar
@@ -140,10 +142,10 @@ export const CONTACT_MESSAGE = "Send Me a Message";
 export const CONTACT_TAG = "STAY CONNECTED";
 export const CONTACT = "CONTACT";
 export const FORM_INPUTS = [
-    {id:"name", label:"Name", type:"text", placeholder:"Your name", as:"input" as "input"},
-    {id:"email", label:"Email", type:"text", placeholder:"your.email@example.com", as:"input" as "input"},
-    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"message", label:"Message", placeholder:"Your message", as:"textarea" as "textarea"},
+    {id:"name", label:"Name", type:"text", placeholder:"Your name", as:"input" as ElementType},
+    {id:"email", label:"Email", type:"text", placeholder:"your.email@example.com", as:"input" as ElementType},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as ElementType},
+    {id:"message", label:"Message", placeholder:"Your message", as:"textarea" as ElementType},
 ];
 
 export const CONTACT_BUTTON = "Send Message";
@@ -216,9 +218,9 @@ export const CANCEL = "CANCEL"
 export const SAVE = "CONFIRM"
 export const EDIT = "EDIT SECTION"
 export const SKILL_FORM_INPUTS = [
-    {id:"tag", label:"Skill Tag", type:"text", placeholder:"Skill tag", as:"input" as "input"},
-    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+    {id:"tag", label:"Skill Tag", type:"text", placeholder:"Skill tag", as:"input" as ElementType},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as ElementType},
+    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as ElementType},
 ];
 
 export const SKILL_FORM_ID = "skill_form"
@@ -229,18 +231,18 @@ export const DELETE_EVENT_ID = "delete_event"
 export const DELETE_PROJECT_ID = "delete_project"
 
 export const EVENT_FORM_INPUTS = [
-    {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
-    {id:"side_text", label:"Side text", type:"text", placeholder:"Your side text", as:"input" as "input"},
-    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
+    {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as ElementType},
+    {id:"side_text", label:"Side text", type:"text", placeholder:"Your side text", as:"input" as ElementType},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as ElementType},
+    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as ElementType},
 ];
 
 export const PROJECT_FORM_INPUTS = [
-    {id:"tag", label:"Project Tag", type:"text", placeholder:"Project tag", as:"input" as "input"},
-    {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as "input"},
-    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as "input"},
-    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as "textarea"},
-    {id:"height", label:"Thumbnail Image height", as: "select" as "select" , options:[
+    {id:"tag", label:"Project Tag", type:"text", placeholder:"Project tag", as:"input" as ElementType},
+    {id:"thumbnail", label:"thumbnail", type:"file", accept:"image/*", placeholder:"Thumbnail", as:"input" as ElementType},
+    {id:"title", label:"Title", type:"text", placeholder:"Your title", as:"input" as ElementType},
+    {id:"short_description", label:"Description", type:"text", placeholder:"Your Description", as:"textarea" as ElementType},
+    {id:"height", label:"Thumbnail Image height", as: "select" as ElementType, options:[
         {value:200, name:"200"},
         {value:400, name:"400"},
         {value:600, name:"600"},

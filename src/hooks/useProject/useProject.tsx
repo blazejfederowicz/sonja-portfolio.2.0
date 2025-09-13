@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { getProjectById, getProjects } from "./selectors";
-import { ID, Project } from "@/types/common";
+import { Project } from "@/types/common";
 import { postProject, removeProject } from "@/store/projects/thunk";
 
 export default function useProject(){

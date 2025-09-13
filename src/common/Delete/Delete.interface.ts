@@ -1,4 +1,4 @@
-import { Children, ID } from "@/types/common";
+import { Children } from "@/types/common";
 
 export interface DeleteProps extends Children{
     formId?:string;

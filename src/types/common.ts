@@ -22,11 +22,11 @@ export interface Project{
     short_description: string;
     height: number;
     content: ContentItem[];
+    thumbnailUrl?: string;
+
 }
 
-export interface ProjectProp extends Project{
-    thumbnailUrl: string;
-}
+
 
 export interface Skill{
     title: string;

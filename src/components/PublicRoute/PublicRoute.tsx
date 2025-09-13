@@ -25,7 +25,7 @@ export default function PublicRoute({children}:Children){
         if(!skillState.skillList.length) dispatch(fetchSkills())
         if(!eventState.eventList.length) dispatch(fetchEvents())
         if(!projectState.projectList.length)dispatch(fetchProjects())
-    },[dispatch])
+    },[dispatch, skillState.skillList.length, eventState.eventList.length, projectState.projectList.length])
     
     if(state.some(s=>s.isLoading)) return <LoadingScreen/>
     if(error) return <Error errorMessage={projectState.errorMessage}/>

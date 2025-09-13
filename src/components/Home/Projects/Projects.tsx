@@ -11,8 +11,8 @@ import Modal from "@/components/Modal/Modal"
 import { DELETE_PROJECT_ID, EDIT, PROJECT_FORM_ID, PROJECTS_TEXT } from "@/constants"
 import ProjectForm from "./components/ProjectForm/ProjectForm"
 import Delete from "@/common/Delete/Delete"
-import { ProjectProp } from "@/types/common"
 import { isValidUrl } from "@/lib/getFormHelpers"
+import { Project } from "@/types/common"
 
 
 export default function Projects(){
@@ -24,7 +24,7 @@ export default function Projects(){
 
 
     const handlePageTransition = (
-        element: Partial<ProjectProp>,
+        element: Partial<Project>,
         event: React.MouseEvent<HTMLDivElement>
     ) => {
         if(!canClick) return;
@@ -37,7 +37,7 @@ export default function Projects(){
         setTimeout(() => {
             setAnimateProject({
             index: element.project_id || "",
-            src: isValidUrl(element.thumbnailUrl),
+            src: isValidUrl(element.thumbnailUrl || ""),
             top: rect.top,
             left: rect.left,
             width: rect.width,
@@ -76,7 +76,7 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover `} 
-                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`,height:e.height}}
+                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl || "")})`,height:e.height}}
                                 initial={{transform:"translateX(-100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
@@ -98,7 +98,7 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover`}
-                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`,height:e.height}}
+                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl || "")})`,height:e.height}}
                                 initial={{transform:"translateX(100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}

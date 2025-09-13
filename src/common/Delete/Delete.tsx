@@ -23,7 +23,7 @@ export default function Delete({formId, dispatch, data}:DeleteProps){
         const foundTitle = data.find((e:any)=> e.id === parseInt(state.id))?.title || CHOOSE_OPTION
 
         setTitle(foundTitle)
-    },[state])
+    },[state, data])
 
     return(
         <div className="flex gap-[1em]">

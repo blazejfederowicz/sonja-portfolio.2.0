@@ -21,7 +21,7 @@ export default function ProjectHeader({project}:ProjectComponentProp){
     }
 
     return(
-        <motion.header key={pathname} className="w-full h-lvh bg-center bg-cover bg-no-repeat" style={{backgroundImage:`url(${isValidUrl(project.thumbnailUrl)})`}}
+        <motion.header key={pathname} className="w-full h-lvh bg-center bg-cover bg-no-repeat" style={{backgroundImage:`url(${isValidUrl(project.thumbnailUrl || "")})`}}
             >
             <motion.div className="w-full h-full relative"
                 initial={false}

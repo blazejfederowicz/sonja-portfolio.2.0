@@ -34,7 +34,7 @@ export async function fileToBase64(file: File): Promise<string> {
   });
 }
 
-export const isValidUrl = (urlString: any): string => {
+export const isValidUrl = (urlString: string): string => {
   try {
         new URL(urlString)
         return urlString

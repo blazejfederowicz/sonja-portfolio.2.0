@@ -24,7 +24,7 @@ export default function Navbar({delay=0,home=false,text="black"}){
         } else {
             setTimeout(() => setShowMenu(false), 300);
         }
-    }, [link])
+    }, [link, controls, setShowMenu])
 
     return(<>
         <nav ref={navRef} className={`fixed top-0 inset-x-0 z-[100] duration-300 overflow-hidden ${

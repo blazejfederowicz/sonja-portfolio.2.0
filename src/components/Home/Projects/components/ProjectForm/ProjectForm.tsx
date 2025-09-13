@@ -67,12 +67,12 @@ export default function ProjectForm() {
     <form id={PROJECT_FORM_ID} onSubmit={handleSubmit(addProject)}>
         {PROJECT_FORM_INPUTS.map((input, index) => (
             <Input
-            key={`form-${index}`} {...input}
-            {...(input.type !== "file" && {
-                value: state[input.id as keyof Omit<typeof state, "content">],
-            })}
-            onChange={handleChange}
-            error={error[input.id as keyof typeof error]}
+              key={`form-${index}`} {...input}
+              {...(input.type !== "file" && {
+                  value: state[input.id as keyof Omit<typeof state, "content">],
+              })}
+              onChange={handleChange}
+              error={error[input.id as keyof typeof error]}
             />
         ))}
 

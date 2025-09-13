@@ -1,5 +1,5 @@
 import { RootState } from "@/store";
-import { EventProp, ID } from "@/types/common";
+import { EventProp } from "@/types/common";
 
 export const getEvents = (state: RootState) => state.events;
 export const getEventById = (payload:string) => (state: RootState) => {

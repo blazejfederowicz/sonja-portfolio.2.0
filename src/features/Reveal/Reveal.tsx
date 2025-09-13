@@ -13,7 +13,7 @@ export const Reveal = ({children, customStyle, delay}: RevealProp)=>{
         if(view){
             controls.start("visible")//.then(()=>setStyles(""))
         }
-    },[view])
+    },[view, controls])
 
     useEffect(()=>{
         setStyles(`${customStyle}`)

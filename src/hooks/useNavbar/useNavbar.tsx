@@ -1,4 +1,3 @@
-import { nav } from "motion/react-m";
 import { useEffect, useRef, useState } from "react";
 
 export default function useNavbar() {
