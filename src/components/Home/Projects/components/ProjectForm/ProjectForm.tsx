@@ -51,7 +51,8 @@ export default function ProjectForm() {
       if (e.currentTarget.type === "checkbox") {
         value = e.currentTarget.checked;
       } else if (files && files[0]) {
-        value = await fileToBase64(files[0]); 
+        // value = await fileToBase64(files[0]);
+        value = "test" 
       }
     }
 

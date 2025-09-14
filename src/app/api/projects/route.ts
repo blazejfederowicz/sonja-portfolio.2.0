@@ -52,22 +52,22 @@ export async function POST(req: Request) {
   const {thumbnail, title, project_id, content, ...rest} = body
 
   try {
-    const thumbnailPath = `projects/${project_id}/${Date.now()}-${title.replace(/\s+/g, '_')}.jpg`;
-    await uploadBase64Image(thumbnail, thumbnailPath)
+    const thumbnailPath = `projects/${project_id}/${Date.now()}-${title.replace(/[^\w.-]/g, '_')}.jpg`;
+    // await uploadBase64Image(thumbnail, thumbnailPath)
 
-    const updatedContent = await Promise.all(
-      content.map( async(item:ContentItem)=>{
-        if(item.image && item.image?.startsWith('data:')){
-          const imagePath = `projects/${project_id}/content-${item.id}-${Date.now()}-${title.replace(/\s+/g, '_')}.jpg`;
-          item.image = await uploadBase64Image(item.image, imagePath)
-        }
-        return item
-      })
-    )
+    // const updatedContent = await Promise.all(
+    //   content.map( async(item:ContentItem)=>{
+    //     if(item.image && item.image?.startsWith('data:')){
+    //       const imagePath = `projects/${project_id}/content-${item.id}-${Date.now()}-${title.replace(/[^\w.-]/g, '_')}.jpg`;
+    //       item.image = await uploadBase64Image(item.image, imagePath)
+    //     }
+    //     return item
+    //   })
+    // )
     
     const { data, error } = await supabaseAdmin
         .from(TABLES.projects)
-        .insert([{title, project_id, thumbnail: thumbnailPath, content:updatedContent, ...rest}])
+        .insert([{title, project_id, thumbnail: thumbnailPath, content, ...rest}])
         .select()
         .single();
 
@@ -76,7 +76,8 @@ export async function POST(req: Request) {
     if (error) throw error;
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error:any) {
-      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    console.log(error)
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
 

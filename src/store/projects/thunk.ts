@@ -15,7 +15,9 @@ export const fetchProjects = createAsyncThunk<Project[]>(
 export const postProject = createAsyncThunk<Project, {project:Project}>(
   ACTION_TYPES.addProject,
   async ({project}) => {
-    const response = await axios.post(API_ROUTES.projects, project);
+    const response = await axios.post(API_ROUTES.projects, project, {
+      headers: { "Content-Type": "application/json; charset=utf-8"  }
+    });
 
     return response.data;
   }

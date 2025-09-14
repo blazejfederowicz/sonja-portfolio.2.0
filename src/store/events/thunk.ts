@@ -15,7 +15,9 @@ export const fetchEvents = createAsyncThunk<EventProp[]>(
 export const postEvent = createAsyncThunk<Event, {event:Event}>(
   ACTION_TYPES.addEvent,
   async ({event}) => {
-    const response = await axios.post(API_ROUTES.events, event);
+    const response = await axios.post(API_ROUTES.events, event, {
+      headers: { "Content-Type": "application/json; charset=utf-8"  }
+    });
 
     return response.data;
   }

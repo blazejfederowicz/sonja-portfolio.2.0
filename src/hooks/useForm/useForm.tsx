@@ -16,7 +16,8 @@ export default function useForm<T extends Record<string, any>>(initialValues:T){
         if (e.currentTarget instanceof HTMLInputElement && type === "checkbox") {
             fieldValue = e.currentTarget.checked;
         } else if(files && files[0]){
-            fieldValue =  await fileToBase64(files[0]);
+            // fieldValue =  await fileToBase64(files[0]);
+            fieldValue = "test"
         }
 
         setState(prev => ({ ...prev, [name]: fieldValue }));

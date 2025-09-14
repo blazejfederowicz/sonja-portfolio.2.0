@@ -30,8 +30,8 @@ export async function POST(req: Request) {
     const { title, short_description, thumbnail, side_text } = body;
 
     try{
-        const filename = `events/${Date.now()}-${title.replace(/\s+/g, '_')}.jpg`;
-        await uploadBase64Image(thumbnail, filename);
+        const filename = `events/${Date.now()}-${title.replace(/[^\w.-]/g, '_')}.jpg`;
+        // await uploadBase64Image(thumbnail, filename);
 
         const { data, error } = await supabaseAdmin
             .from(TABLES.events)
@@ -46,6 +46,7 @@ export async function POST(req: Request) {
         if (error)  throw error
         return new Response(JSON.stringify(data), { status: 200 });
     } catch (error:any) {
+        console.log(error)
         return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     }
    
