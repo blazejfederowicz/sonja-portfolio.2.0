@@ -32,7 +32,7 @@ export default function Home() {
 
     return(
         <>
-            <header className="min-h-lvh relative bg-no-repeat bg-[40%_23%] bg-cover" style={{backgroundImage:`url('/images/bg.jpg')`}}>
+            <header className="min-h-lvh relative w-full bg-no-repeat bg-[40%_23%] bg-cover" style={{backgroundImage:`url('/images/bg.jpg')`}}>
                 <Navbar/>
                 <Hero/>
             </header>

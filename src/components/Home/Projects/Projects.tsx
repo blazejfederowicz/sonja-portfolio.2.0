@@ -81,7 +81,7 @@ export default function Projects(){
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
                             >
-                                <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl py-10 px-5 touch-none opacity-0">{e.title}</p>
+                                <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl py-10 px-5 select-none opacity-0">{e.title}</p>
                             </motion.div>
                              <div className={`w-full h-full flex flex-col items-end justify-end py-10 px-5 absolute top-0 left-0 bg-sea/80 scale-x-0 origin-right ${hoverAnim?"group-hover:scale-x-100":""} duration-400 pointer-events-none`}>
                                  <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl text-white opacity-0 transition-opacity duration-200 w-full delay-300 group-hover:opacity-100">{splitString(e.title).albanian}</p>
@@ -106,7 +106,7 @@ export default function Projects(){
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
                             >
-                                <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl py-10 px-5 touch-none opacity-0">{e.title}</p>
+                                <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl py-10 px-5 select-none opacity-0">{e.title}</p>
                             </motion.div>
                             <div className={`w-full h-full flex flex-col items-end justify-end py-10 px-5 absolute top-0 left-0 bg-sea/80 scale-x-0 origin-right ${hoverAnim?"group-hover:scale-x-100":""} duration-400 pointer-events-none`}>
                                  <p className="font-alta tracking-widest shrink font-bold text-3xl sm:text-4xl text-white opacity-0 transition-opacity duration-200 w-full text-end delay-300 group-hover:opacity-100">{splitString(e.title).albanian}</p>
