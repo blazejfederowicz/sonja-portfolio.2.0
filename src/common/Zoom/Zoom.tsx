@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 type ZoomProps = {
   source: string;
@@ -12,7 +12,7 @@ type ZoomProps = {
 
 const transition = { type: "spring" as const, damping: 25, stiffness: 120 };
 
-export const Zoom: React.FC<ZoomProps> = ({ source, alt, className }) => {
+export const Zoom = ({ source, alt, className }:ZoomProps) => {
   const [isOpen, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const portalRootRef = useRef<HTMLElement | null>(null);
