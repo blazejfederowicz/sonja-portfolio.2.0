@@ -4,10 +4,12 @@ import { DeleteProps } from "./Delete.interface";
 import Input from "../Input/Input";
 import useForm from "@/hooks/useForm/useForm";
 import { useEffect, useState } from "react";
+import useAuth from "@/hooks/useAuth/useAuth";
 
 export default function Delete({formId, dispatch, data}:DeleteProps){
     const [select, setSelect] = useState([{value: "", name: ""}])
     const [title, setTitle] = useState(CHOOSE_OPTION)
+    const { session } = useAuth()
     const { state, handleChange, handleSubmit } = useForm({
             id:"",
         })
@@ -24,6 +26,8 @@ export default function Delete({formId, dispatch, data}:DeleteProps){
 
         setTitle(foundTitle)
     },[state, data])
+
+    if(!session) return;
 
     return(
         <div className="flex gap-[1em]">

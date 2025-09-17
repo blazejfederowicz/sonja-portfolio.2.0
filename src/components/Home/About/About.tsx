@@ -33,7 +33,7 @@ export default function About(){
 
     return(
         <section id="about" className="container mx-auto px-2 pt-22 mb-22">
-            <div className="flex container px-2 mx-auto gap-[1em]">
+            <div className="flex flex-col sm:flex-row container px-2 mx-auto gap-[1em]">
                 <Tag text={ABOUT_TEXT}/>
                 <Modal buttonColor='bg-blue-600' headline={ABOUT_TEXT} form={SKILL_FORM_ID} buttonText={EDIT}>
                     <SkillForm/>

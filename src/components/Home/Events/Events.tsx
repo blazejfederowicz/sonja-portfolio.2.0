@@ -54,7 +54,7 @@ export default function Events(){
     return(
         <>
             <section id='events' className="py-22 bg-white-almost">
-                <div className="flex container px-2 mx-auto gap-[1em]">
+                <div className="flex flex-col sm:flex-row  container px-2 mx-auto gap-[1em]">
                     <Tag text={EVENTS_TEXT}/>
                     <Modal buttonColor='bg-blue-600' headline={EVENTS_TEXT} form={EVENT_FORM_ID} buttonText={EDIT}>
                         <EventForm/>
