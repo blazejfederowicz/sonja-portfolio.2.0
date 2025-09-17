@@ -52,7 +52,7 @@ export default function Projects(){
 
 
     return(<>
-        <section id="projects" className="container px-2 mx-auto mt-28">
+        <section id="projects" className="container px-2 mx-auto mt-28 overflow-hidden">
             <div>
                 <div className="flex flex-col sm:flex-row container px-2 mx-auto gap-[1em]">
                     <Tag text={PROJECTS_TEXT}/>
@@ -61,7 +61,7 @@ export default function Projects(){
                     </Modal>
                     <Delete data={projectState.projectList} formId={DELETE_PROJECT_ID} dispatch={deleteProject}/>
                 </div>
-                <div className={`${!!projectState.errorMessage || projectState.isLoading?"":"grid"} md:grid-cols-2 gap-[1em] max-w-[400px] md:max-w-[1000px] w-full mx-auto mt-25 overflow-hidden`}>
+                <div className={`${!!projectState.errorMessage || projectState.isLoading?"":"grid grid-cols-1"} md:grid-cols-2 gap-[1em] max-w-[400px] md:max-w-[1000px] w-full mx-auto mt-25`}>
                     {   
                     projectState.isLoading? <Loading/>:
                     !!projectState.errorMessage? <Error errorMessage={projectState.errorMessage}/>: <>
