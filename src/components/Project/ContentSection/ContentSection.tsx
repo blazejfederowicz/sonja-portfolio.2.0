@@ -1,7 +1,7 @@
 import { Reveal } from "@/features/Reveal/Reveal";
 import Image from "next/image";
 import { ContentItem } from "@/types/common";
-import { isValidUrl } from "@/lib/getFormHelpers";
+import { isValidUrl, splitString } from "@/lib/getFormHelpers";
 
 export default function ContentSection({image, name, content, bgColor, isReverse}:ContentItem){
 
@@ -13,10 +13,12 @@ export default function ContentSection({image, name, content, bgColor, isReverse
                 </Reveal>
                 <div className="w-full flex flex-col justify-center text-black/50 border-l-2 border-l-black/20 px-10">
                     <Reveal>
-                        <h3 className='text-5xl mb-10'>{name}</h3>
+                        <h3 className='text-4xl sm:text-5xl line-clamp-none mb-2'>{splitString(name).albanian}</h3>
+                        <h3 className='text-xl sm:text-4xl mb-10 italic opacity-80'>{splitString(name || "").english}</h3>
                     </Reveal>
                     <Reveal>
-                        <p className=' text-lg max-w-[500px] whitespace-pre-line'>{content}</p>
+                        <p className='sm:text-lg max-w-[500px] whitespace-pre-line mb-4'>{splitString(content).albanian}</p>
+                        <p className='sm:text-lg max-w-[500px] whitespace-pre-line italic opacity-80'>{splitString(content).english}</p>
                     </Reveal>
                 </div>
             </div>

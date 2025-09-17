@@ -43,3 +43,13 @@ export const isValidUrl = (urlString: string): string => {
     }
 }
 
+export const splitString = (str: string | undefined)=>{
+    if(!str) return {albanian: "", english: ""}
+
+    const strArr = str.split("|").map(s => s.trim())
+    return {
+        albanian: strArr[0] || "",
+        english: strArr[1] || ""
+    }
+}
+

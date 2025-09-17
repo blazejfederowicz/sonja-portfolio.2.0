@@ -86,7 +86,7 @@ export default function Events(){
                             Array.isArray(eventState.eventList) && eventState.eventList.map((e,i,arr)=>(
                                 <div key={i}>
                                     <div  className="w-full flex relative pr-10 sm:pr-20" style={{height:height}}>
-                                        <div className="w-[15em] md:w-[22em] absolute sm:static bg-white-almost h-[280px] sm:h-full py-10 sm:py-20 px-5 md:px-0 flex justify-center text-wood-brown flex-col shadow-2xl -bottom-[90px] sm:bottom-0">
+                                        <div className="w-[15em] md:w-[22em] absolute sm:static bg-white-almost min-h-[280px] sm:h-full py-10 sm:py-20 px-5 md:px-0 flex justify-center text-wood-brown flex-col shadow-2xl -bottom-[90px] sm:bottom-0">
                                             <Reveal>
                                                 <h5 className='md:text-xl sm:text-lg text-base tracking-wider md:pl-14 md:pr-5 font-semibold'>{e.title}</h5>
                                             </Reveal>
@@ -95,7 +95,7 @@ export default function Events(){
                                             </Reveal>
                                         </div>
                                         <div ref={ref} className="grow bg-no-repeat bg-cover bg-center flex items-end re sm:block h-full" style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`}}/>
-                                        <h3 className="rotate-90 tracking-wider w-[1.5em] h-fit box-border flex items-center justify-center text-salmon2 font-alta text-4xl sm:text-6xl leading-none whitespace-nowrap absolute right-0 top-1/2 -translate-y-1/2"><Reveal>{e.side_text}</Reveal></h3>
+                                        <h3 className="rotate-90 tracking-wider w-[1em] sm:w-[2em] md:w-[1.5em] h-fit box-border flex items-center justify-center text-salmon2 font-alta text-4xl sm:text-5xl md:text-6xl leading-none whitespace-nowrap absolute right-0 top-1/2 -translate-y-1/2"><Reveal>{e.side_text}</Reveal></h3>
                                     </div>
                                     {i < arr.length - 1 && (
                                         <div className="w-full pe-20">
