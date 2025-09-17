@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { useParams, usePathname } from 'next/navigation'
 
 export default function Footer (){
-    const [color, setColor] = useState("bg-white-almost")
+    const [color, setColor] = useState("bg-white")
     const {projectState, findProject} = useProject()
     const pathname = usePathname()
     const {slug} = useParams()
