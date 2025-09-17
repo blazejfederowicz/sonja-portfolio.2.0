@@ -105,6 +105,46 @@
   
 }
 
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 66.66%;
+  cursor: zoom-in;
+  margin: 50px 0;
+  overflow: hidden;
+}
+
+.image-container img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.zoom-portal-shade {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.zoom-portal-img {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  z-index: 10001;
+  cursor: zoom-out;
+  pointer-events: auto;
+}
+
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);

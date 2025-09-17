@@ -23,7 +23,7 @@ export default function Hero(){
     },[width])
     
     return(<>
-        <section id="home" className="min-h-lvh flex flex-col pt-[80px]">
+        <section id="home" className="min-h-dvh flex flex-col pt-[80px]">
             <div className="w-fit relative my-auto grow grid grid-rows-[1fr_repeat(4,auto)_1fr] lg:grid-rows-3 max-h-full lg:max-h-[400px] lg:grid-cols-[repeat(1,auto)] grid-cols-2 gap-[1em] md:gap-[2em] container mx-auto px-2">
                 <div className=" flex items-center justify-center lg:justify-end word1-grid-area overflow-hidden">
                     <Reveal>

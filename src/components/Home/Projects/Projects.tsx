@@ -11,7 +11,7 @@ import Modal from "@/components/Modal/Modal"
 import { DELETE_PROJECT_ID, EDIT, PROJECT_FORM_ID, PROJECTS_TEXT } from "@/constants"
 import ProjectForm from "./components/ProjectForm/ProjectForm"
 import Delete from "@/common/Delete/Delete"
-import { isValidUrl } from "@/lib/getFormHelpers"
+import { isValidUrl, splitString } from "@/lib/getFormHelpers"
 import { Project } from "@/types/common"
 
 
@@ -76,13 +76,16 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover `} 
-                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl || "")})`,height:e.height}}
+                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl || "")})`,minHeight:e.height}}
                                 initial={{transform:"translateX(-100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
-                            />
-                             <div className={`w-full h-full flex items-end justify-end py-10 px-5 absolute top-0 left-0 bg-sea/80 scale-x-0 origin-right ${hoverAnim?"group-hover:scale-x-100":""} duration-400 pointer-events-none`}>
-                                 <p className="font-alta tracking-widest font-bold text-4xl text-white opacity-0 transition-opacity duration-200 delay-300 group-hover:opacity-100">{e.title}</p>
+                            >
+                                <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl py-10 px-5 touch-none opacity-0">{e.title}</p>
+                            </motion.div>
+                             <div className={`w-full h-full flex flex-col items-end justify-end py-10 px-5 absolute top-0 left-0 bg-sea/80 scale-x-0 origin-right ${hoverAnim?"group-hover:scale-x-100":""} duration-400 pointer-events-none`}>
+                                 <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl text-white opacity-0 transition-opacity duration-200 w-full delay-300 group-hover:opacity-100">{splitString(e.title).albanian}</p>
+                                 <p className="font-alta tracking-widest font-bold text-2xl sm:text-3xl text-white/80 opacity-0 transition-opacity duration-200 delay-300 w-full group-hover:opacity-100 italic">{splitString(e.title).english}</p>
                             </div>
                        </motion.div>
                     )})}
@@ -98,13 +101,16 @@ export default function Projects(){
                                  } : {}}
                         >
                             <motion.div onClick={(event)=>handlePageTransition(e,event)} className={` text-white bg-center bg-no-repeat bg-cover`}
-                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl || "")})`,height:e.height}}
+                                style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl || "")})`,minHeight:e.height}}
                                 initial={{transform:"translateX(100px)", opacity:0}}
                                 whileInView={{transform:"translateX(0)",opacity:1, transition:{delay:0.2, ease:[0.4,0.2,0.6,1]}}}
                                 viewport={{once:true}}
-                            />
-                            <div className={`w-full h-full flex items-end justify-end py-10 px-5 absolute top-0 left-0 bg-sea/80 scale-x-0 origin-right ${hoverAnim?"group-hover:scale-x-100":""} duration-400 pointer-events-none`}>
-                                 <p className="font-alta tracking-widest font-bold text-4xl text-white opacity-0 transition-opacity duration-200 delay-300 group-hover:opacity-100">{e.title}</p>
+                            >
+                                <p className="font-alta tracking-widest font-bold text-end text-3xl sm:text-4xl py-10 px-5 touch-none opacity-0">{e.title}</p>
+                            </motion.div>
+                            <div className={`w-full h-full flex flex-col items-end justify-end py-10 px-5 absolute top-0 left-0 bg-sea/80 scale-x-0 origin-right ${hoverAnim?"group-hover:scale-x-100":""} duration-400 pointer-events-none`}>
+                                 <p className="font-alta tracking-widest shrink font-bold text-3xl sm:text-4xl text-white opacity-0 transition-opacity duration-200 w-full text-end delay-300 group-hover:opacity-100">{splitString(e.title).albanian}</p>
+                                 <p className="font-alta tracking-widest font-bold text-2xl sm:text-3xl text-white/80 opacity-0 transition-opacity duration-200 delay-300 w-full group-hover:opacity-100 italic">{splitString(e.title).english}</p>
                             </div>
                        </motion.div>
                     )})}
@@ -127,7 +133,7 @@ export default function Projects(){
                             top: 0,
                             left: 0,
                             width: "100vw",
-                            height: "100vh",
+                            height: "100dvh",
                             transition: { duration: 0.9, ease: [0.4, 0, 0.2, 1] },
                             }}
                             onAnimationComplete={() => {

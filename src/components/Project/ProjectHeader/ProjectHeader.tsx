@@ -21,7 +21,7 @@ export default function ProjectHeader({project}:ProjectComponentProp){
     }
 
     return(
-        <motion.header key={pathname} className="w-full h-lvh bg-center bg-cover bg-no-repeat" style={{backgroundImage:`url(${isValidUrl(project.thumbnailUrl || "")})`}}
+        <motion.header key={pathname} className="w-full h-dvh bg-center bg-cover bg-no-repeat" style={{backgroundImage:`url(${isValidUrl(project.thumbnailUrl || "")})`}}
             >
             <motion.div className="w-full h-full relative"
                 initial={false}
@@ -34,7 +34,7 @@ export default function ProjectHeader({project}:ProjectComponentProp){
                 }}
             >
                 <Navbar delay={0.5} home={true} text='white'/>
-                <div className="container mx-auto px-5 md:px-10 h-full flex flex-col justify-end py-40 md:py-20">
+                <div className="container mx-auto px-5 md:px-10 h-full flex flex-col justify-end py-10 md:py-20">
                         <motion.div className="flex items-center justify-center w-fit"
                             initial={false}
                             animate={mounted?"visible": "hidden"}
