@@ -10,15 +10,15 @@ export default function ContactHeader(){
     const {mounted} = useScreen()
 
     return(
-        <motion.header key={pathname} className="w-full h-lvh bg-center bg-no-repeat bg-cover min-h-[200px] md:min-h-[250px]" style={{backgroundImage:`url('/images/contact.jpg')`}}
+        <motion.header key={pathname} className="w-full h-dvh bg-center bg-no-repeat bg-cover min-h-[200px] md:min-h-[250px]" style={{backgroundImage:`url('/images/contact.jpg')`}}
             initial={false}
             animate={mounted?"visible":"hidden"}
             variants={{
                 hidden:{
-                    height:"100vh",
+                    height:"100dvh",
                 },
                 visible:{
-                    height:"25vh",
+                    height:"25dvh",
                     transition:{
                         duration:0.4,
                         ease:[0.4,0.2,0.6,1],

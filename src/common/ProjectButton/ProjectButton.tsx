@@ -7,7 +7,7 @@ export default function ProjectButton({click, text}: ProjectButtonProps){
     const { mounted } = useScreen()
 
     return(
-        <motion.button onClick={click} className='w-fit py-3 px-5 md:py-5 group md:px-10 border relative border-white/70 cursor-pointer before:absolute before:content-[""] before:transition-transform before:block before:origin-left before:h-full before:w-full before:bg-white before:top-0 before:left-0 before:scale-x-0 before:duration-400 before:-z-30 hover:before:scale-x-100 active:before:scale-x-100'
+        <motion.button onClick={click} className='w-fit py-3 px-5 lg:py-5 group md:px-10 border relative border-white/70 cursor-pointer before:absolute before:content-[""] before:transition-transform before:block before:origin-left before:h-full before:w-full before:bg-white before:top-0 before:left-0 before:scale-x-0 before:duration-400 before:-z-30 hover:before:scale-x-100 active:before:scale-x-100'
             initial={false}
             animate={mounted?"visible":"hidden"}
             variants={{

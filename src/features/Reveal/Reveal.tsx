@@ -3,7 +3,7 @@ import {motion,useAnimation,useInView} from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { RevealProp } from './Reveal.interface';
 
-export const Reveal = ({children, customStyle, delay}: RevealProp)=>{
+export const Reveal = ({children, customStyle="", delay}: RevealProp)=>{
     const ref = useRef(null)
     const view = useInView(ref,{once:true})
     const [styles, setStyles]= useState(`${customStyle}`)

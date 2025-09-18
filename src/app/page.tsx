@@ -58,7 +58,7 @@ export default function Home() {
                 initial="start"
                 variants={{
                     start:{height:footerPosition.height, top:footerPosition.top, position:"fixed", zIndex:9999},
-                    end:{height:"100vh", top:0}
+                    end:{height:"100dvh", top:0}
                 }}
                 animate="end"
                 transition= {{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}

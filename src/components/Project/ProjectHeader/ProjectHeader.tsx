@@ -74,7 +74,7 @@ export default function ProjectHeader({project}:ProjectComponentProp){
                             }}
                             viewport={{once:true}}
                         >{splitString(project.title).albanian}</motion.h1>
-                        <motion.h1 className=' text-white/80 text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-alta tracking-widest italic'
+                        <motion.h1 className=' text-white/80 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-alta tracking-widest italic'
                             initial={false}
                             animate={mounted?"visible":"hidden"}
                             variants={{

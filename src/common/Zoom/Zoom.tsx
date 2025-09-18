@@ -3,16 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
-
-type ZoomProps = {
-  source: string;
-  alt?: string;
-  className?: string;
-};
+import { ZoomProps } from "./Zoom.interface";
 
 const transition = { type: "spring" as const, damping: 25, stiffness: 120 };
 
-export const Zoom = ({ source, alt, className }:ZoomProps) => {
+export const Zoom = ({ source, alt, className="" }:ZoomProps) => {
   const [isOpen, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const portalRootRef = useRef<HTMLElement | null>(null);
@@ -49,11 +44,11 @@ export const Zoom = ({ source, alt, className }:ZoomProps) => {
   const portalRoot = portalRootRef.current;
 
   return (
-    <div className="image-container">
+    <div className="h-full flex justify-center items-center">
       <motion.img
         src={source}
+        className={`object-cover object-center w-full h-full ${className}`}
         alt={alt}
-        className={className}
         loading="lazy"
         onClick={() => setOpen(true)}
         initial={{ scale: 1 }}
