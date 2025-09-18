@@ -5,6 +5,7 @@ import { COPYRIGHT, FOOTER_ROUTES, LINK_TEXT, SOCIAL_LINKS, SOCIALS } from '@/co
 import useProject from '@/hooks/useProject/useProject'
 import { useEffect, useState } from 'react'
 import { useParams, usePathname } from 'next/navigation'
+import { splitString } from '@/lib/getFormHelpers'
 
 export default function Footer (){
     const [color, setColor] = useState("bg-white")
@@ -56,7 +57,9 @@ export default function Footer (){
                     <div className="flex flex-col flex-wrap h-[8em]">
                         {
                             projectState.projectList.map(e=>(
-                                <Link key={e.id} href={`/project/${e.id}`} className='py-1 text-sm sm:text-base md:text-lg font-medium me-2 text-wood-brown/60 hover:text-wood-brown active:text-wood-brown/90'>Project {e.id}</Link>
+                                <Link key={e.project_id} href={`/project/${e.project_id}`} className='py-1 text-sm sm:text-base md:text-lg font-medium me-2 text-wood-brown/60 line-clamp-1 hover:text-wood-brown active:text-wood-brown/90 w-fit'>
+                                    {splitString(e.title).albanian.slice(0,10)}...
+                                </Link>
                             ))
                         }
                     </div>

@@ -75,7 +75,7 @@ export default function Hero(){
                 </div>
                 <div className="row-span-2 ben-grid-area lg:hidden">
                     <Reveal>
-                        <Image width={500} height={500}src='/images/tample.png' className="lg:h-[14em] h-[9em] object-contain w-fit" alt="bigBen"/>
+                        <Image width={500} height={500}src='/images/rect.png' className="lg:h-[14em] h-[9em] object-contain w-fit" alt="bigBen"/>
                     </Reveal>
                 </div>
                 <div className="flex sm:gap-8 gap-2 md:gap-4 xl:gap-8 justify-center my-5 col-span-2      items-center word3-grid-area">
@@ -90,7 +90,7 @@ export default function Hero(){
                 <SecondaryButton text={PROJECTS_BUTTON} href='#projects'/>
                 <div className="arch-grid-area flex justify-end items-end lg:justify-start lg:hidden">
                     <Reveal customStyle="shrink">
-                            <Image width={500} height={500} className='h-[8em] object-contain w-fit' src='/images/rect.png' alt="arch"/>
+                            <Image width={500} height={500} className='h-[8em] object-contain w-fit' src='/images/tample.png' alt="arch"/>
                     </Reveal>
                 </div>
             </div>
