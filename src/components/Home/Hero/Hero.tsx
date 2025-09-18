@@ -90,7 +90,7 @@ export default function Hero(){
                 <SecondaryButton text={PROJECTS_BUTTON} href='#projects'/>
                 <div className="arch-grid-area flex justify-end items-end lg:justify-start lg:hidden">
                     <Reveal customStyle="shrink">
-                            <Image width={500} height={500} className='h-[8em] object-contain w-fit' src='/images/tample.png' alt="arch"/>
+                            <Image width={500} height={500} className='h-[6em] object-contain w-fit' src='/images/tample.png' alt="arch"/>
                     </Reveal>
                 </div>
             </div>
