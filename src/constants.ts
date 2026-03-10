@@ -191,7 +191,7 @@ export const ERROR_MESSAGES = {
 
 export const ERROR = "Error: "
 export const LOADING_TEXT = "Loading"
-export const UNKNOWN_ERROR = "Unkown error"
+export const UNKNOWN_ERROR = "An unknown error occurred"
 
 export const enum ACTION_TYPES{
     skills = "skills/fetchSkills",

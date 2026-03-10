@@ -1,7 +1,7 @@
-import { EventProp } from "@/types/common";
+import { Event } from "@/types/common";
 
 export interface EventState{
-    eventList: EventProp[];
+    eventList: Event[];
     isLoading: boolean;
     errorMessage: string | null;
 }

@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/storage/v1/**',
       },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
     domains: ['placehold.co']    
   }

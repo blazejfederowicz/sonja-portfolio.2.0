@@ -1,7 +1,7 @@
-import { fileToBase64, handleErrors } from "@/lib/getFormHelpers";
+import { handleErrors } from "@/lib/getFormHelpers";
 import { useState } from "react";
 
-export default function useForm<T extends Record<string, any>>(initialValues:T){
+export default function useForm<T extends Record<string, unknown>>(initialValues:T){
     const [state, setState] = useState<T>(initialValues)
     const [error, setError] = useState<Partial<Record<keyof T, string>>>({})
 
@@ -29,7 +29,7 @@ export default function useForm<T extends Record<string, any>>(initialValues:T){
     ) =>{
         e.preventDefault()
         
-        const errors = handleErrors({...state})
+        const errors = handleErrors({...state} as Record<string, string>)
 
         if(Object.keys(errors).length > 0){
             setError(prev => ({...prev, ...errors}))

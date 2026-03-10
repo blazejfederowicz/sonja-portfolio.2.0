@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProjectState } from "./reducer.interface";
-import { fetchProjects, postProject, removeProject } from "./thunk";
+import { 
+    fetchProjects, 
+    postProject, 
+    removeProject,
+    updateProject 
+} from "./thunk";
 import { UNKNOWN_ERROR } from "@/constants";
 
 const projectsInitialState: ProjectState = {
@@ -36,6 +41,16 @@ const projectSlice = createSlice({
             .addCase(postProject.rejected,(state, action)=>{
                 state.isLoading = false;
                 state.errorMessage = action.error.message || UNKNOWN_ERROR
+            })
+            .addCase(updateProject.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(updateProject.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateProject.rejected, (state, action) => {
+                state.isLoading = false;
+                state.errorMessage = action.error.message || UNKNOWN_ERROR;
             })
             .addCase(removeProject.fulfilled, (state)=>{
                 state.isLoading = false

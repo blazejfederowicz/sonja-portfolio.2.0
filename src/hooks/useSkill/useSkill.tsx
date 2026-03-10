@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { getSkills } from "./selectors"
-import { postSkill, removeSkill } from "@/store/skills/thunk"
-import { ID, Skill } from "@/types/common"
+import { postSkill, removeSkill, updateSkill } from "@/store/skills/thunk"
+import { Skill } from "@/types/common"
 import { addSkill } from "@/store/skills/slice"
 import { useCallback } from "react"
 
@@ -13,14 +13,18 @@ export default function useSkill(){
     const newSkill =  useCallback((payload: Skill) =>{
         dispatch(addSkill(payload))
     },[dispatch])
-    const dispatchSkill = (skill:Skill) => dispatch(postSkill({skill}))
-    const deleteSkill = (id:ID) => dispatch(removeSkill(id))
+    const dispatchSkill = async (skill:Skill) => await dispatch(postSkill({skill}))
+    const deleteSkill = async (id:string) => await dispatch(removeSkill(id))
+    const updateCurrentSkill = useCallback(async (skill: Skill) =>{
+        await dispatch(updateSkill({ skill }))
+    },[dispatch]) 
 
     
     return {
         skillState,
         dispatchSkill,
         deleteSkill,
-        newSkill
+        newSkill,
+        updateCurrentSkill
     }
 }

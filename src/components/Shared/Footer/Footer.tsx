@@ -16,18 +16,22 @@ export default function Footer (){
 
     useEffect(()=>{
         if(pathname === `/project/${slug}`){
-            const newColor = !!currentProject ? currentProject.content[currentProject.content.length -1].bgColor : "bg-white-almost" 
+            const newColor = !!currentProject && currentProject.content.length > 0 ? currentProject.content[currentProject.content.length -1].bgColor : "bg-white-almost" 
             setColor(newColor || "bg-white-almost")
         }
     },[pathname, slug, currentProject])
 
     return(<>
         <footer className="bg-zinc-100 relative">
-            <div className="flex justify-between gap-[2em] mb-5">
-                <div className={`w-[4em] ms-5 h-[2em] rounded-full relative ${color} -translate-y-1/2`}></div>
-                <div className={`w-1/2 mx-auto -translate-y-1/2 h-[3em] rounded-b-full ${color}`}></div>
-                <div className={`w-[4em] me-5 h-[2em] rounded-full relative ${color} -translate-y-1/2`}></div>
-            </div>
+            {currentProject && currentProject?.content.length > 0 && (
+                <div className="flex justify-between gap-[2em] mb-5">
+                    <div className={`w-[4em] ms-5 h-[2em] rounded-full relative -translate-y-1/2`} style={{backgroundColor: color}}></div>
+                    <div className={`w-1/2 mx-auto -translate-y-1/2 h-[3em] rounded-b-full`} style={{backgroundColor: color}}></div>
+                    <div className={`w-[4em] me-5 h-[2em] rounded-full relative -translate-y-1/2`} style={{backgroundColor: color}}></div>
+                </div>
+                )
+            }
+            
             <div className="container px-2 mx-auto mb-5  w-fit grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 items-start gap-[3em]  rounded-full ">
                 <div className="h-[10em] flex justify-center col-span-2 sm:col-span-3 md:col-span-1 ">
                     <Image width={500} height={500} src='/images/paronama.svg' className='h-full' loading="lazy" alt="Paronama"/>

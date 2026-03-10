@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Sonja Pengili",
   description: "Portfolio showcasing my skills and projects",
   icons:{
-    icon:"/images/brandIconSalmon.svg"
+    icon:"/images/brandIconSalmon.svg",
   }
 };
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body
-        className={`antialiased overflow-x-hidden`}
+        className={`antialiased overflow-x-hidden font-montserrat`}
       >
         <Providers>
           <PublicRoute>

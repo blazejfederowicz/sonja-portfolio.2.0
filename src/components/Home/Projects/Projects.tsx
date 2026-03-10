@@ -7,10 +7,7 @@ import Tag from "@/common/Tag/Tag"
 import useProject from "@/hooks/useProject/useProject"
 import Loading from "@/components/Shared/Loading/Loading"
 import Error from "@/components/Shared/Error/Error"
-import Modal from "@/components/Modal/Modal"
-import { DELETE_PROJECT_ID, EDIT, PROJECT_FORM_ID, PROJECTS_TEXT } from "@/constants"
-import ProjectForm from "./components/ProjectForm/ProjectForm"
-import Delete from "@/common/Delete/Delete"
+import { PROJECTS_TEXT } from "@/constants"
 import { isValidUrl, splitString } from "@/lib/getFormHelpers"
 import { Project } from "@/types/common"
 
@@ -20,7 +17,7 @@ export default function Projects(){
     const [hoverAnim, setHoverAnim] = useState(true)
     const router = useRouter()
     const [canClick, setCanClick] = useState(true)
-    const {projectState, deleteProject} = useProject()
+    const {projectState} = useProject()
 
 
     const handlePageTransition = (
@@ -56,10 +53,6 @@ export default function Projects(){
             <div>
                 <div className="flex flex-col sm:flex-row container px-2 mx-auto gap-[1em]">
                     <Tag text={PROJECTS_TEXT}/>
-                    <Modal buttonColor='bg-blue-600' headline={PROJECTS_TEXT} form={PROJECT_FORM_ID} buttonText={EDIT}>
-                        <ProjectForm/>
-                    </Modal>
-                    <Delete data={projectState.projectList} formId={DELETE_PROJECT_ID} dispatch={deleteProject}/>
                 </div>
                 <div className={`${!!projectState.errorMessage || projectState.isLoading?"":"grid grid-cols-1"} md:grid-cols-2 gap-[1em] max-w-[400px] md:max-w-[1000px] w-full mx-auto mt-25`}>
                     {   

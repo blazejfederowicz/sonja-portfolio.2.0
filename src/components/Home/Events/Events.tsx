@@ -3,14 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import {motion, useScroll, useTransform} from 'motion/react'
 import { Reveal } from '@/features/Reveal/Reveal';
 import Tag from '@/common/Tag/Tag';
-import { DELETE_EVENT_ID, EDIT, EVENT_FORM_ID, EVENTS_TEXT} from '@/constants';
+import { EVENTS_TEXT} from '@/constants';
 import Error from '@/components/Shared/Error/Error';
 import LoadingAnim from '@/features/LoadingAnim/LoadingAnim';
 import useEvents from '@/hooks/useEvents/useEvents';
-import Modal from '@/components/Modal/Modal';
-import EventForm from './components/EventForm/EventForm';
 import useScreen from '@/hooks/useScreen/useScreen';
-import Delete from '@/common/Delete/Delete';
 import { isValidUrl } from '@/lib/getFormHelpers';
 
 
@@ -30,7 +27,7 @@ export default function Events(){
     const radius = 90;
     const circumference = 2*Math.PI *radius
     const stroke = useTransform(scrollYProgress,[0,1],[circumference,0])
-    const {eventState, deleteEvent} = useEvents()
+    const {eventState} = useEvents()
 
     useEffect(() => {
         if (!ref.current) return
@@ -56,10 +53,6 @@ export default function Events(){
             <section id='events' className="py-22 bg-white-almost">
                 <div className="flex flex-col sm:flex-row  container px-2 mx-auto gap-[1em]">
                     <Tag text={EVENTS_TEXT}/>
-                    <Modal buttonColor='bg-blue-600' headline={EVENTS_TEXT} form={EVENT_FORM_ID} buttonText={EDIT}>
-                        <EventForm/>
-                    </Modal>
-                    <Delete data={eventState.eventList} formId={DELETE_EVENT_ID} dispatch={deleteEvent}/>
                 </div>
                 <div className="h-[2em] w-full bg-white mt-5 sticky top-18 lg:hidden z-30 flex items-center">
                     <motion.div className="h-[1em] w-full bg-pond" style={{originX:0, scaleX:smallScreenProgressBar}}/>
@@ -81,7 +74,7 @@ export default function Events(){
                     </div>
                     <div>
                         {   
-                        eventState.isLoading ? <LoadingAnim customClass='w-full h-full flex text-7xl justify-center items- center' />:
+                        eventState.isLoading ? <LoadingAnim customClass='w-full h-full flex text-7xl justify-center items-center' />:
                         !!eventState.errorMessage? <Error errorMessage={eventState.errorMessage} />:
                             Array.isArray(eventState.eventList) && eventState.eventList.map((e,i,arr)=>(
                                 <div key={i}>
@@ -94,7 +87,7 @@ export default function Events(){
                                                 <p className='mt-4 md:pl-14 md:pr-22 text-sm md:text-base'>{e.short_description}</p>
                                             </Reveal>
                                         </div>
-                                        <div ref={ref} className="grow bg-no-repeat bg-cover bg-center flex items-end re sm:block h-full" style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl)})`}}/>
+                                        <div ref={ref} className="grow bg-no-repeat bg-cover bg-center flex items-end re sm:block h-full" style={{backgroundImage:`url(${isValidUrl(e.thumbnailUrl ?? '')})`}}/>
                                         <h3 className="rotate-90 tracking-wider w-[1em] sm:w-[2em] md:w-[1.5em] h-fit box-border flex items-center justify-center text-salmon2 font-alta text-4xl sm:text-5xl md:text-6xl leading-none whitespace-nowrap absolute right-0 top-1/2 -translate-y-1/2"><Reveal>{e.side_text}</Reveal></h3>
                                     </div>
                                     {i < arr.length - 1 && (

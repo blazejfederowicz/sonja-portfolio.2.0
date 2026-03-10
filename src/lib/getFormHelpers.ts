@@ -21,8 +21,8 @@ export const getReducedString = (string:string, length:number): string=>{
     return string.length > length? string.slice(0,length)+"..." : string;
 }
 
-export const mapObject = (obj:any) =>{
-    return obj.map((e:any) => getReducedString(e.title as string, 25))
+export const mapObject = <T extends { title?: string }>(obj: T[]) => {
+    return obj.map((e) => getReducedString(e.title || "", 25));
 }
 
 export async function fileToBase64(file: File): Promise<string> {
@@ -38,7 +38,7 @@ export const isValidUrl = (urlString: string): string => {
   try {
         new URL(urlString)
         return urlString
-    } catch (_) {
+    } catch {
         return IMAGE_PLACEHOLDER
     }
 }

@@ -1,18 +1,47 @@
-import supabase from "@/lib/supabaseClient"
+import { useState, useEffect, useMemo } from "react"
+import  supabase  from "@/lib/supabaseClient"
 import { Session } from "@supabase/supabase-js"
-import { useEffect, useState } from "react"
 
-export default function useAuth(){
-    const [session, setSession] = useState<Session | null>(null)
+export default function useAuth() {
+  const [session, setSession] = useState<Session | null>(null)
+  const [loading, setLoading] = useState(true)
 
-    const checkSession = async () =>{
-        const {data} = await supabase.auth.getSession()
+  useEffect(() => {
+    const getSession = async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession()
+        if (error) throw error
         setSession(data.session)
+      } catch (err) {
+        console.error("Error fetching session:", err)
+        setSession(null)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    useEffect(()=> {checkSession()},[])
+    getSession()
 
-    return{
-        session
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session)
+        setLoading(false)
+      }
+    )
+
+    return () => {
+      listener.subscription.unsubscribe()
     }
+  }, [])
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+  };
+
+  return useMemo(() => ({
+    session,
+    user: session?.user ?? null,
+    loading,
+    signOut
+  }), [session, loading])
 }

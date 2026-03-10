@@ -6,12 +6,15 @@ import { Reveal } from "@/features/Reveal/Reveal";
 import Image from "next/image";
 import { BRAND_TEXT, NAV_ROUTES } from "@/constants";
 import useNavbar from "@/hooks/useNavbar/useNavbar";
+import useAuth from "@/hooks/useAuth/useAuth";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar({delay=0,home=false,text="black"}){
     const [ link , setLink ] = useState(false);
     const controls = useAnimation()
     const {navRef, showMenu, isScrolled, setShowMenu } = useNavbar()
-
+    const { session } = useAuth()
+    
     useEffect(()=>{
         if(link ){
             controls.start("visible")
@@ -27,15 +30,26 @@ export default function Navbar({delay=0,home=false,text="black"}){
     }, [link, controls, setShowMenu])
 
     return(<>
-        <nav ref={navRef} className={`fixed top-0 inset-x-0 z-[100] duration-300 overflow-hidden ${
+        <nav ref={navRef} className={`fixed top-0 inset-x-0 z-100 duration-300 overflow-hidden ${
         isScrolled || showMenu ? "bg-neutral-100/50 backdrop-blur-sm shadow-lg " : "bg-transparent "
-      } ${isScrolled?"py-4":"py-5"} ${link  && window.innerWidth<641 ? "max-h-[400px]" : "max-h-[80px]"}`}>
+      } ${isScrolled?"py-4":"py-5"} ${link  && window.innerWidth<641 ? "max-h-100" : "max-h-20"}`}>
             <div className="container px-2 h-full flex justify-between items-center mx-auto">
                 <Reveal delay={delay}>
-                    <Link href="/" className="flex gap-5">
-                        <Image width={500} height={500} src='/images/brandIcon.svg' className="h-[2.5em] w-fit"  alt="brand"/>
-                        <p className="mt-3 font-alta text-[#525351]">{BRAND_TEXT}</p>
-                    </Link>
+                    <div className="flex gap-2 items-center">
+                        {session ? (
+                            <Link href="/admin" className="ml-4">
+                                <Button>
+                                    Admin
+                                </Button>
+                            </Link>
+                        ) : (
+                            <Link href="/" className="flex gap-5">
+                                <Image width={500} height={500} src='/images/brandIcon.svg' className="h-[2.5em] w-fit"  alt="brand"/>
+                                <p className="mt-3 font-alta text-[#525351]">{BRAND_TEXT}</p>
+                            </Link>
+                        )}
+                    </div>
+                    
                 </Reveal>
                 <Reveal delay={delay}>
                     <div className="h-full custom-width flex items-center gap-6">
@@ -52,7 +66,7 @@ export default function Navbar({delay=0,home=false,text="black"}){
                                 transition={{ease: easeIn}}
                             >
                                 {NAV_ROUTES.map((link, index)=>(
-                                    <li key={`nav-link-${index}`} className={`flex justify-center opacity-80 mx-2 overflow-hidden tracking-widest cursor-pointer ${link && index !==0 ?'mx-2 ease-in delay-[25ms]':'ms-1 ease-out'}`}>
+                                    <li key={`nav-link-${index}`} className={`flex justify-center opacity-80 mx-2 overflow-hidden tracking-widest cursor-pointer ${link && index !==0 ?'mx-2 ease-in delay-25':'ms-1 ease-out'}`}>
                                         <Link href={home && index !== 0 && index !== NAV_ROUTES.length-1?"/":link.value} className={`hover:text-shadow-lg active:text-shadow-lg animLink duration-150 ease-in-out text-${text}`}>{link.name}</Link>
                                     </li>
                                 ))}
@@ -60,7 +74,7 @@ export default function Navbar({delay=0,home=false,text="black"}){
                         </div>
                         
                         <div className="nav-links order-1 sm:order-0 group relative cursor-pointer" onClick={()=>setLink (prev=> !prev)}>
-                        <motion.div className="ease-in-out transition-colors duration-150 group-hover:bg-salmon2 group-active:bg-salmon2 h-[4px] bg-salmon mb-1"
+                        <motion.div className="ease-in-out transition-colors duration-150 group-hover:bg-salmon2 group-active:bg-salmon2 h-1 bg-salmon mb-1"
                             initial="off"
                             animate={link ?"on":"off"}
                             variants={{
@@ -68,7 +82,7 @@ export default function Navbar({delay=0,home=false,text="black"}){
                                 off:{x:0,y:0,rotate:0, width:"3em"}
                             }}
                         />
-                        <motion.div className="w-[2em] transition-colors ease-in-out duration-150 group-hover:bg-salmon2 group-active:bg-salmon2 ms-auto h-[4px] bg-salmon "
+                        <motion.div className="w-[2em] transition-colors ease-in-out duration-150 group-hover:bg-salmon2 group-active:bg-salmon2 ms-auto h-1 bg-salmon "
                             initial="off"
                             animate={link ?"on":"off"}
                             variants={{

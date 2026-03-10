@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import { UseFetchProps } from "./useFetch.interface";
 
-export default function useFetch({fetchFn, deps = []}: UseFetchProps) {
-    const [ data, setData ] = useState<object | null | []>(null)
-    const [ loading, setLoading ] = useState(true);
-    const [ error, setError ] = useState<string | null>(null);
+export default function useFetch<T>({ fetchFn, deps = [] }: UseFetchProps<T>) {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
+    // useEffect dependencies include a dynamic array; disable linting for the deps line below
     useEffect(() => {
         let isMounted = true;
 
@@ -16,14 +17,19 @@ export default function useFetch({fetchFn, deps = []}: UseFetchProps) {
         if (!isMounted) return;
 
         fetchFn()
-            .then(setData)
-            .catch((error) => setError(error.message || "An error occurred while fetching data"))
-            .finally(() => setLoading(false));
+            .then((result) => {
+                if (isMounted) setData(result);
+            })
+            .catch((error) => setError((error as Error).message || "An error occurred while fetching data"))
+            .finally(() => {
+                if (isMounted) setLoading(false);
+            });
 
         return () => {
             isMounted = false;
-        }
-    },deps)
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fetchFn, ...deps]);
 
     return { data, loading, error };
 }

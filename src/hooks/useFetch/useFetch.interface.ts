@@ -1,4 +1,4 @@
-export interface UseFetchProps {
-    fetchFn: () => Promise<any[] | any>;
-    deps?: any[];
+export interface UseFetchProps<T = unknown> {
+    fetchFn: () => Promise<T>;
+    deps?: unknown[];
 }

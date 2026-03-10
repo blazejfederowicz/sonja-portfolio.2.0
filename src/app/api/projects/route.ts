@@ -1,115 +1,73 @@
-import { TABLES } from "@/constants";
-import { uploadBase64Image } from "@/lib/getBufferHelper";
+import { NextResponse } from "next/server";
+import { nanoid } from "@reduxjs/toolkit";
 import supabaseAdmin from "@/lib/supabaseAdmin";
-import { ContentItem, Project } from "@/types/common";
+
+
 
 export async function GET() {
   const { data, error } = await supabaseAdmin
-    .from(TABLES.projects)
+    .from("projects")
     .select("*")
-    .order("id", { ascending: false });
+    .order("created_at", { ascending: false });
 
   if (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const dataWithUrls = await Promise.all(
-    (data || []).map(async (row) => {
-      const updatedRow: Project = { ...row };
+  return NextResponse.json(data);
+}
 
-      if (row.thumbnail) {
-        const { data: urlData } = supabaseAdmin.storage
-          .from("images")
-          .getPublicUrl(row.thumbnail);
-        updatedRow.thumbnailUrl = urlData.publicUrl;
-      }
+export async function POST(request: Request) {
+  const project = await request.json();
 
-      if (row.content && Array.isArray(row.content)) {
-        const updatedContent = await Promise.all(
-          row.content.map(async (item: ContentItem) => {
-            if (item.image) {
-              const { data: urlData } = supabaseAdmin.storage
-                .from("images")
-                .getPublicUrl(item.image);
-              return { ...item, image: urlData.publicUrl };
-            }
-            return item;
-          })
-        );
-        updatedRow.content = updatedContent;
-      }
-
-      return updatedRow;
+  const { data, error } = await supabaseAdmin
+    .from("projects")
+    .insert({
+      ...project,
+      project_id: nanoid(),
+      content: project.content ?? [],
     })
-  );
+    .select()
+    .single();
 
-  return new Response(JSON.stringify(dataWithUrls), { status: 200 });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json(data);
 }
 
+export async function PUT(request: Request) {
+  const project = await request.json();
 
-export async function POST(req: Request) {
-  const body = await req.json();
-  const {thumbnail, title, project_id, content, ...rest} = body
+  const { data, error } = await supabaseAdmin
+    .from("projects")
+    .update({
+      ...project,
+      thumbnail: project.thumbnail,
+    })
+    .eq("project_id", project.project_id)
+    .select()
+    .single();
 
-  try {
-    const thumbnailPath = `projects/${project_id}/${Date.now()}-${title.replace(/[^\w.-]/g, '_')}.jpg`;
-    // await uploadBase64Image(thumbnail, thumbnailPath)
-
-    // const updatedContent = await Promise.all(
-    //   content.map( async(item:ContentItem)=>{
-    //     if(item.image && item.image?.startsWith('data:')){
-    //       const imagePath = `projects/${project_id}/content-${item.id}-${Date.now()}-${title.replace(/[^\w.-]/g, '_')}.jpg`;
-    //       item.image = await uploadBase64Image(item.image, imagePath)
-    //     }
-    //     return item
-    //   })
-    // )
-    
-    const { data, error } = await supabaseAdmin
-        .from(TABLES.projects)
-        .insert([{title, project_id, thumbnail: thumbnailPath, content, ...rest}])
-        .select()
-        .single();
-
-        console.log(error)
-
-    if (error) throw error;
-    return new Response(JSON.stringify(data), { status: 200 });
-  } catch (error:any) {
-    console.log(error)
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  return NextResponse.json(data);
 }
 
-export async function DELETE(req: Request) {
-  try{
-    const body = await req.json();
-    const { id, path } =  body
+export async function DELETE(request: Request) {
+  const { id } = await request.json();
 
-    const {data: files, error: listError } = await supabaseAdmin.storage
-          .from('images')
-          .list(`projects/${path}`)
+  const { error } = await supabaseAdmin
+    .from("projects")
+    .delete()
+    .eq("project_id", id);
 
-    if(listError) throw listError;
-    if(!files || files.length ===0) throw new Error('No files found');
-    
-    const filePaths = files.map(file => `projects/${path}/${file.name}`)
-
-    const { error:storageError } = await supabaseAdmin.storage
-          .from('images')
-          .remove(filePaths)
-
-      if (storageError) throw storageError;
-
-    const { data, error } = await supabaseAdmin
-      .from(TABLES.projects)
-      .delete()
-      .eq('id',parseInt(id));
-
-    if (error) throw error;
-
-    return new Response(JSON.stringify(data), { status: 200 });
-  } catch (error:any){
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  return NextResponse.json({ success: true });
 }

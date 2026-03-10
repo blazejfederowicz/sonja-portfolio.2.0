@@ -10,7 +10,7 @@ import { fetchSkills } from "@/store/skills/thunk"
 import { useEffect } from "react"
 import Error from "../Shared/Error/Error"
 import { Children } from "@/types/common"
-import LoadingScreen from "@/features/LoadingScreen/LoadingScreen"
+// LoadingScreen import removed; not used
 
 export default function PublicRoute({children}:Children){
     const {projectState} = useProject()

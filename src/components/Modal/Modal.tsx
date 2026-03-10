@@ -3,14 +3,10 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { CANCEL, SAVE } from '@/constants'
 import { ModalProps } from './Modal.interface'
-import useAuth from '@/hooks/useAuth/useAuth'
 import { useState } from 'react'
 
 export default function Modal({children, headline, form, buttonColor, buttonText}:ModalProps) {
     const [open, setOpen] = useState(false)
-    const { session } = useAuth()
-
-    if(!session) return
 
     return (
         <div>

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {EventState } from "./reducer.interface";
 import { UNKNOWN_ERROR } from "@/constants";
-import { fetchEvents, postEvent, removeEvent } from "./thunk";
-import { EventProp } from "@/types/common";
+import { fetchEvents, postEvent, removeEvent, updateEvent } from "./thunk";
+import { Event } from "@/types/common";
 
 const eventsInitialState: EventState = {
     eventList: [],
@@ -14,7 +14,7 @@ const eventSlice = createSlice({
     name: 'events',
     initialState: eventsInitialState,
     reducers:{
-        addEvent(state, action: PayloadAction<EventProp>) {
+        addEvent(state, action: PayloadAction<Event>) {
             state.eventList.push(action.payload);
         },
     },
@@ -40,6 +40,16 @@ const eventSlice = createSlice({
             .addCase(postEvent.rejected,(state, action)=>{
                 state.isLoading = false;
                 state.errorMessage = action.error.message || UNKNOWN_ERROR
+            })
+            .addCase(updateEvent.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(updateEvent.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateEvent.rejected, (state, action) => {
+                state.isLoading = false;
+                state.errorMessage = action.error.message || UNKNOWN_ERROR;
             })
             .addCase(removeEvent.fulfilled, (state)=>{
                 state.isLoading = false

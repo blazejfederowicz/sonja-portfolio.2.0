@@ -1,13 +1,11 @@
 import { Reveal } from "@/features/Reveal/Reveal";
-import Image from "next/image";
 import { ContentItem } from "@/types/common";
 import { isValidUrl, splitString } from "@/lib/getFormHelpers";
 import { Zoom } from "@/common/Zoom/Zoom";
 
 export default function ContentSection({image, name, content, bgColor, isReverse}:ContentItem){
-
     return(
-        <div className={`w-full py-30 ${bgColor}`}>
+        <div className={`w-full py-30`} style={{backgroundColor: bgColor}}>
             <div className="grid md:grid-cols-2 gap-[5em] xl:gap-[10em] container mx-auto px-2 relative">
                 <Reveal delay={0.3} customStyle={`${isReverse?"order-1": "order-0"} `}>
                     <Zoom source={isValidUrl(image || "")}  alt={name || ""} className={!!name?"md:absolute":"max-h-[400px]"}/>

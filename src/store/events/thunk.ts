@@ -1,9 +1,9 @@
 import { ACTION_TYPES, API_ROUTES } from "@/constants";
-import { Event, EventProp } from "@/types/common";
+import { Event } from "@/types/common";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchEvents = createAsyncThunk<EventProp[]>(
+export const fetchEvents = createAsyncThunk<Event[]>(
   ACTION_TYPES.events,
   async () => {
     const response = await axios.get(API_ROUTES.events);
@@ -25,9 +25,19 @@ export const postEvent = createAsyncThunk<Event, {event:Event}>(
 
 export const removeEvent = createAsyncThunk(
   ACTION_TYPES.removeEvent,
-  async ({id, path}:any) => {
-    const response = await axios.delete(API_ROUTES.events, { data: {id, path} });
+  async ({ id, path }: { id: string; path?: string }) => {
+    const response = await axios.delete(API_ROUTES.events, { data: { id, path } });
 
+    return response.data;
+  }
+);
+
+export const updateEvent = createAsyncThunk<Event, { event: Event }>(
+  ACTION_TYPES.updateEvent,
+  async ({ event }) => {
+    const response = await axios.put(API_ROUTES.events, event, {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+    });
     return response.data;
   }
 );

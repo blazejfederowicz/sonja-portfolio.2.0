@@ -1,27 +1,34 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { getProjectById, getProjects } from "./selectors";
+import { getProjects } from "./selectors";
 import { Project } from "@/types/common";
-import { postProject, removeProject } from "@/store/projects/thunk";
+import { postProject, removeProject, updateProject } from "@/store/projects/thunk";
 import { useCallback } from "react";
 
 export default function useProject(){
     const dispatch = useAppDispatch()
     
     const projectState = useAppSelector(getProjects);
-    const addProject = useCallback((project: Project) =>{
-        dispatch(postProject({ project }))
+    const addProject = useCallback(async (project: Project) =>{
+        await dispatch(postProject({ project }))
     },[dispatch]) 
-    const findProject = (id:string) => useAppSelector(getProjectById(id)); 
-    const deleteProject = (payload:{id:string}) =>{ 
-            const project = projectState.projectList.find((project) => project.id === parseInt(payload.id))
+    const updateCurrentProject = useCallback(async (project: Project) =>{
+        await dispatch(updateProject({ project }))
+    },[dispatch]) 
+    const findProject = useCallback(
+        (id: string) => projectState.projectList.find((p) => p.project_id === id),
+        [projectState]
+    );
+    const deleteProject = async (payload:{id:string}) =>{ 
+            const project = projectState.projectList.find((project) => project.project_id === payload.id)
     
-            dispatch(removeProject({id:payload.id, path:project?.project_id}))
+            await dispatch(removeProject({id:payload.id, path:project?.project_id}))
         }
 
     return{
         projectState,
         findProject,
         deleteProject,
-        addProject
+        addProject,
+        updateCurrentProject
     }
 }

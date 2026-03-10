@@ -1,47 +1,55 @@
-import { TABLES } from "@/constants";
+import { NextResponse } from "next/server";
+import { nanoid } from "@reduxjs/toolkit";
 import supabaseAdmin from "@/lib/supabaseAdmin";
 
+
 export async function GET() {
-    const {data, error} = await supabaseAdmin
-        .from(TABLES.skills)
-        .select('*')
+  const { data } = await supabaseAdmin
+    .from("skills")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-    if(error) {
-        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-    }
-
-    return new Response(JSON.stringify(data), {status: 200})
+  return NextResponse.json(data);
 }
 
+export async function POST(request: Request) {
+  const skill = await request.json();
 
-export async function POST(req: Request) {
-  const body = await req.json();
+  const { data } = await supabaseAdmin
+    .from("skills")
+    .insert({
+      ...skill,
+      skill_id: nanoid(),
+    })
+    .select()
+    .single();
+
+  return NextResponse.json(data);
+}
+
+export async function DELETE(request: Request) {
+  const { id } = await request.json();
+
+  await supabaseAdmin.from("skills").delete().eq("skill_id", id);
+
+  return NextResponse.json({ success: true });
+}
+
+export async function PUT(request: Request) {
+  const skill = await request.json();
 
   const { data, error } = await supabaseAdmin
-    .from(TABLES.skills)
-    .insert([body])
+    .from("skills")
+    .update({
+      ...skill,
+    })
+    .eq("skill_id", skill.skill_id)
     .select()
     .single();
 
   if (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return new Response(JSON.stringify(data), { status: 200 });
-}
-
-export async function DELETE(req: Request) {
-    const body = await req.json();
-    const { id } = await body
-
-    const { data, error } = await supabaseAdmin
-      .from(TABLES.skills)
-      .delete()
-      .eq('id',parseInt(id));
-
-    if (error) {
-      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-    }
-
-    return new Response(JSON.stringify(data), { status: 200 });
+  return NextResponse.json(data);
 }

@@ -1,5 +1,5 @@
 import { ACTION_TYPES, API_ROUTES } from "@/constants";
-import { ID, Skill } from "@/types/common";
+import { Skill } from "@/types/common";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -25,9 +25,19 @@ export const postSkill = createAsyncThunk<Skill, {skill:Skill}>(
 
 export const removeSkill = createAsyncThunk(
   ACTION_TYPES.removeSkill,
-  async (id:ID) => {
-    const response = await axios.delete(API_ROUTES.skills, { data: id });
+  async (id:string) => {
+    const response = await axios.delete(API_ROUTES.skills, { data: { id } });
     
+    return response.data;
+  }
+);
+
+export const updateSkill = createAsyncThunk<Skill, { skill: Skill }>(
+  ACTION_TYPES.updateSkill,
+  async ({ skill }) => {
+    const response = await axios.put(API_ROUTES.skills, skill, {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+    });
     return response.data;
   }
 );

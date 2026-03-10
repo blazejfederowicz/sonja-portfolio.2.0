@@ -31,3 +31,13 @@ export const removeProject = createAsyncThunk(
     return response.data;
   }
 );
+
+export const updateProject = createAsyncThunk<Project, { project: Project }>(
+  ACTION_TYPES.updateProject,
+  async ({ project }) => {
+    const response = await axios.put(API_ROUTES.projects, project, {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+    });
+    return response.data;
+  }
+);
