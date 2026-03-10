@@ -12,14 +12,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
 
-    const { session, loading } = useAuth()
-    const router = useRouter();
+  const { session, loading } = useAuth()
+  const router = useRouter();
 
-    useEffect(() => {
-      if (!loading && !session) {
-        router.replace("/login");
-      }
-    }, [loading, session, router]);
+  useEffect(() => {
+    if (!loading && !session) {
+      router.replace("/login");
+    }
+  }, [loading, session, router]);
 
   if (loading || !session) return <div className="h-dvh text-2xl md:text-7xl animate-pulse flex justify-center items-center">Loading <LoadingAnim/></div>;
 
