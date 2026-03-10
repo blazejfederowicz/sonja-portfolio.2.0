@@ -34,9 +34,9 @@ export default function ProjectsPage() {
       className: "w-16",
       render: (project: Project) => (
         <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
-          {project.thumbnailUrl ? (
+          {project.thumbnail ? (
             <Image
-              src={project.thumbnailUrl}
+              src={project.thumbnail}
               alt={project.title}
               width={48}
               height={48}

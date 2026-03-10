@@ -110,9 +110,9 @@ export default function EventsPage() {
       className: "w-16",
       render: (event: Event) => (
         <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
-          {event.thumbnailUrl ? (
+          {event.thumbnail ? (
             <Image
-              src={event.thumbnailUrl}
+              src={event.thumbnail}
               alt={event.title}
               width={48}
               height={48}
