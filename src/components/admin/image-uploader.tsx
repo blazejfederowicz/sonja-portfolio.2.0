@@ -10,7 +10,7 @@ interface ImageUploaderProps {
   onChange: (url: string) => void;
   onRemove?: () => void;
   className?: string;
-  aspectRatio?: "square" | "video" | "wide";
+  aspectRatio?: "square" | "video" | "wide" | "phone";
   label?: string;
 }
 
@@ -31,6 +31,7 @@ export function ImageUploader({
     square: "aspect-square",
     video: "aspect-video",
     wide: "aspect-[21/9]",
+    phone: "aspect-square md:aspect-video"
   };
 
   const handleUpload = useCallback(

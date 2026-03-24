@@ -12,9 +12,6 @@ export function AdminHeader({ title, subtitle }: AdminHeaderProps) {
     <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
       <div>
         <h1 className="text-lg font-semibold text-foreground">{title}</h1>
-        {subtitle && (
-          <p className="text-sm text-muted-foreground">{subtitle}</p>
-        )}
       </div>
 
       <div className="flex items-center gap-4">

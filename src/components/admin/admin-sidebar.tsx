@@ -49,11 +49,12 @@ export function AdminSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const { signOut } = useAuth()
 
-  return (
+  return (<>
     <aside
       className={cn(
-        "flex flex-col h-screen bg-card border-r border-border transition-all duration-300",
-        collapsed ? "w-16" : "w-64"
+        "md:flex flex-col h-screen bg-card border-r border-border transition-all duration-300",
+        collapsed ? "w-16" : "w-64",
+        "fixed md:static z-50",
       )}
     >
       {/* Header */}
@@ -125,5 +126,12 @@ export function AdminSidebar() {
         </button>
       </div>
     </aside>
-  );
+    
+    {!collapsed && (
+      <div
+        className="fixed inset-0 bg-black/10 md:hidden z-40"
+        onClick={() => setCollapsed(true)}
+      />
+    )}
+  </>);
 }

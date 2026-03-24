@@ -38,7 +38,7 @@ export function DataTable<T>({
 
   if (data.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+      <div className="flex flex-col items-center justify-center text-center px-4 md:px-0 py-12 text-muted-foreground">
         <Inbox className="w-12 h-12 mb-2 opacity-50" />
         <p>{emptyMessage}</p>
       </div>

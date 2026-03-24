@@ -17,6 +17,9 @@ import Link from "next/link";
 import { ImageUploader } from "@/components/admin/image-uploader";
 import useProject from "@/hooks/useProject/useProject";
 import { cn } from "@/lib/utils";
+import SortableItem from "./sortable-item";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
 
 interface ProjectFormProps {
   initialData?: Project;
@@ -67,6 +70,23 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
     await dispatch(fetchProjects());
     router.push("/admin/projects");
   };
+
+  function handleDragEnd(event:DragEndEvent) {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      setContentItems((items) => {
+        const oldIndex = items.findIndex(i => i.id === active.id);
+        const newIndex = items.findIndex(i => i.id === over?.id);
+
+        const newItems = [...items];
+        const [moved] = newItems.splice(oldIndex, 1);
+        newItems.splice(newIndex, 0, moved);
+
+        return newItems;
+      });
+    }
+  }
 
   const addContentItem = () => {
     const newItem: ContentItem = {
@@ -241,122 +261,20 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
             </button>
           </div>
         ) : (
-          <div className="space-y-4">
-            {contentItems.map((item, index) => (
-              <div
-                key={item.id}
-                className="border border-border rounded-lg p-4 space-y-3"
-              >
-                <div className="flex items-center gap-3">
-                  <GripVertical className="w-4 h-4 text-muted-foreground cursor-move" />
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Section {index + 1}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => removeContentItem(index)}
-                    className="ml-auto p-1.5 rounded-lg hover:bg-destructive/10 transition-colors text-muted-foreground hover:text-destructive"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-
-                {/* Layout preview indicator */}
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                  <span>Layout preview:</span>
-                  <span className={cn(
-                    "px-2 py-0.5 rounded bg-muted",
-                    item.isReverse && "bg-primary/10 text-primary"
-                  )}>
-                    {item.isReverse ? "Image Left | Content Right" : "Content Left | Image Right"}
-                  </span>
-                </div>
-
-                <div className={cn(
-                  "grid grid-cols-1 md:grid-cols-2 gap-3",
-                  item.isReverse && "md:[direction:rtl] [&>*]:md:[direction:ltr]"
-                )}>
-                  {/* Content side */}
-                  <div className="space-y-3">
-                    <div className="space-y-2">
-                      <label className="text-sm text-muted-foreground">
-                        Section Name
-                      </label>
-                      <input
-                        type="text"
-                        value={item.name || ""}
-                        onChange={(e) =>
-                          updateContentItem(index, { name: e.target.value })
-                        }
-                        className="w-full h-9 px-3 rounded-lg bg-muted border-0 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                        placeholder="e.g., Overview, Design Process"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm text-muted-foreground">
-                        Content
-                      </label>
-                      <textarea
-                        value={item.content || ""}
-                        onChange={(e) =>
-                          updateContentItem(index, { content: e.target.value })
-                        }
-                        className="w-full min-h-20 px-3 py-2 rounded-lg bg-muted border-0 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-y"
-                        placeholder="Section content..."
-                      />
-                    </div>
-                  </div>
-
-                  {/* Image side */}
-                  <div className="space-y-2">
-                    <label className="text-sm text-muted-foreground">
-                      Section Image
-                    </label>
-                    <ImageUploader
-                      value={item.image || ""}
-                      onChange={(url) =>
-                        updateContentItem(index, { image: url })
-                      }
-                      aspectRatio="video"
-                      label="Upload Image"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 pt-2 border-t border-border mt-3">
-                  <div className="flex items-center gap-2">
-                    <label className="text-sm text-muted-foreground">
-                      Background:
-                    </label>
-                    <input
-                      type="color"
-                      value={item.bgColor || "#ffffff"}
-                      onChange={(e) =>
-                        updateContentItem(index, { bgColor: e.target.value })
-                      }
-                      className="w-8 h-8 rounded cursor-pointer"
-                    />
-                  </div>
-
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={item.isReverse || false}
-                      onChange={(e) =>
-                        updateContentItem(index, { isReverse: e.target.checked })
-                      }
-                      className="rounded"
-                    />
-                    <span className="text-sm text-muted-foreground">
-                      Reverse layout (image on left)
-                    </span>
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={contentItems.map(item => item.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              {contentItems.map((item, index) => (
+                <SortableItem key={item.id} item={item} index={index} updateContentItem={updateContentItem} removeContentItem={removeContentItem}/>
+              ))}
+            </SortableContext>
+          </DndContext>
+            )}
       </div>
     </form>
   );
