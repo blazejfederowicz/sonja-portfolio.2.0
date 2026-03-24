@@ -135,7 +135,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
       </div>
 
       {/* Basic Info */}
-      <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+      <div className="bg-card border border-border rounded-xl p3 md:p-6 space-y-4">
         <h2 className="text-lg font-semibold text-foreground">
           Basic Information
         </h2>
@@ -227,16 +227,16 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
           <ImageUploader
             value={formData.thumbnail}
             onChange={(url) => setFormData({ ...formData, thumbnail: url })}
-            aspectRatio="video"
+            aspectRatio="phone"
             label="Upload Thumbnail"
           />
         </div>
       </div>
 
       {/* Content Sections */}
-      <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+      <div className="bg-card border border-border rounded-xl p3 md:p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="text-base sm:text-lg font-semibold text-foreground">
             Content Sections
           </h2>
           <button
@@ -245,7 +245,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
             className="inline-flex items-center gap-2 px-3 py-1.5 bg-muted text-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm"
           >
             <Plus className="w-4 h-4" />
-            Add Section
+            <span className="hidden sm:block">Add Section</span>
           </button>
         </div>
 

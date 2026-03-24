@@ -172,7 +172,7 @@ export default function SkillsPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-colors text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
-              Add Skill
+              <span className="hidden sm:block">Add Skill</span>
             </button>
           </div>
 

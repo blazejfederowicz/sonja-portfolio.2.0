@@ -129,7 +129,7 @@ export default function ProjectsPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-colors text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
-              Add Project
+              <span className="hidden sm:block">Add Project</span>
             </Link>
           </div>
 

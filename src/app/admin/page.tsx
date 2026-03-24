@@ -84,12 +84,12 @@ export default function AdminDashboard() {
               <Link
                 key={action.href}
                 href={action.href}
-                className="flex items-center gap-3 p-4 rounded-lg bg-muted hover:bg-muted/80 transition-colors group"
+                className="flex items-center gap-3 p-4 rounded-lg bg-muted hover:bg-muted/80 transition-colors group justify-between"
               >
                 <div className="p-2 rounded-lg bg-background">
                   <action.icon className="w-5 h-5 text-foreground" />
                 </div>
-                <span className="font-medium text-foreground">
+                <span className="font-medium text-foreground hidden sm:block">
                   {action.label}
                 </span>
                 <Plus className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" />
