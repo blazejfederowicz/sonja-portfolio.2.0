@@ -135,7 +135,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
       </div>
 
       {/* Basic Info */}
-      <div className="bg-card border border-border rounded-xl p3 md:p-6 space-y-4">
+      <div className="bg-card border border-border rounded-xl p-3 md:p-6 space-y-4">
         <h2 className="text-lg font-semibold text-foreground">
           Basic Information
         </h2>
@@ -234,7 +234,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
       </div>
 
       {/* Content Sections */}
-      <div className="bg-card border border-border rounded-xl p3 md:p-6 space-y-4">
+      <div className="bg-card border border-border rounded-xl p-3 md:p-6 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-base sm:text-lg font-semibold text-foreground">
             Content Sections
