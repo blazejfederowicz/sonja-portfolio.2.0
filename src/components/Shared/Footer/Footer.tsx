@@ -3,12 +3,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { COPYRIGHT, FOOTER_ROUTES, LINK_TEXT, SOCIAL_LINKS, SOCIALS } from '@/constants'
 import useProject from '@/hooks/useProject/useProject'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { useParams, usePathname } from 'next/navigation'
 import { splitString } from '@/lib/getFormHelpers'
 
 export default function Footer (){
-    const [color, setColor] = useState("bg-white")
+    const [color, setColor] = useState("#fff")
     const {projectState, findProject} = useProject()
     const pathname = usePathname()
     const {slug} = useParams()
@@ -16,14 +16,16 @@ export default function Footer (){
 
     useEffect(()=>{
         if(pathname === `/project/${slug}`){
-            const newColor = !!currentProject && currentProject.content.length > 0 ? currentProject.content[currentProject.content.length -1].bgColor : "bg-white-almost" 
-            setColor(newColor || "bg-white-almost")
+            const newColor = !!currentProject && currentProject.content.length > 0 ? currentProject.content[currentProject.content.length -1].bgColor : "#fff" 
+            setColor(newColor || "#fff")
         }
+
+        console.log(pathname)
     },[pathname, slug, currentProject])
 
     return(<>
         <footer className="bg-zinc-100 relative">
-            {currentProject && currentProject?.content.length > 0 && (
+            {(pathname === `/project/${slug}` || pathname === '/contact') && (
                 <div className="flex justify-between gap-[2em] mb-5">
                     <div className={`w-[4em] ms-5 h-[2em] rounded-full relative -translate-y-1/2`} style={{backgroundColor: color}}></div>
                     <div className={`w-1/2 mx-auto -translate-y-1/2 h-[3em] rounded-b-full`} style={{backgroundColor: color}}></div>
