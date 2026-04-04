@@ -11,7 +11,7 @@ export function AdminHeader({ title, subtitle }: AdminHeaderProps) {
   return (
     <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
       <div>
-        <h1 className="text-lg font-semibold text-foreground">{title}</h1>
+        <h1 className="text-lg font-semibold text-foreground line-clamp-1">{title}</h1>
       </div>
 
       <div className="flex items-center gap-4">
